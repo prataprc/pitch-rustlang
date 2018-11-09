@@ -13,7 +13,7 @@ published : true
 # Theme Setting
 # Doc: https://gitpitch.com/docs/settings/theme
 #
-theme : simple
+theme : white
 
 #
 # Theme-Override Setting
@@ -32,13 +32,13 @@ logo-position : top-left
 # Footnote Setting
 # Doc: https://gitpitch.com/docs/settings/footnote
 #
-footnote : "GitPitch - The Fastest Way From Idea To Presentation"
+footnote : "Rustlang - Nextgen systems language"
 
 #
 # Highlight (Code) Setting
 # Doc: https://gitpitch.com/docs/settings/highlight
 #
-highlight : atom-one-dark
+highlight : github
 
 #
 # Layout Setting
@@ -52,5 +52,7 @@ layout : center
 # reason THIS VALUE SHOULD NOT BE MODIFIED. See:
 # https://gitpitch.com/docs/layout-features/snap-layout-slide-transitions
 #
-transition : none
+transition : fade
 
+slide-number : true
+vertical-center : false

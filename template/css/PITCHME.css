@@ -218,6 +218,10 @@
 
 /** Reveal.js Core Override Styles **/
 
+.reveal ol {
+    text-align: left;
+    font-size: 0.75em;
+}
 .reveal ol li {
     margin-left: 0;
     padding-right: 0;
@@ -294,3 +298,65 @@
   font-size: 50% !important;
 }
 
+/* pitch-rustlang */
+.reveal .slides {
+    text-align: left !important;
+}
+.reveal h1 {
+    font-size: 1.7em !important;
+    text-align: left !important;
+    color: crimson !important;
+}
+.reveal p {
+    text-align: left !important;
+    font-size: 0.75em !important;
+}
+.reveal ul {
+    text-align: left !important;
+    font-size: 0.75em !important;
+}
+.reveal div {
+    font-size: 0.75em !important;
+}
+.text-crimson {
+    color: crimson !important;
+}
+.author-box {
+    font-size: 50% !important;
+    text-align: left;
+}
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+    text-transform: none !important;
+}
+div.slide1 h1 {
+    text-align: center !important;
+}
+code.hljs {
+    font-size: 90% !important;
+    background: #F0F0F0 !important;
+}
+.reveal .slides section .code-presenting-annotation {
+    background: #303030 !important;
+    padding: 10px !important;
+    font-size: 70% !important;
+}
+.mt20 {
+    margin-top: 20px !important;
+}
+ul.para {
+    margin: 20px 0px !important;
+    list-style-type: none !important;
+    text-align: left !important;
+}
+.text-left {
+    text-align: left !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.text-blue {
+    color: blue;
+}
+.text-red {
+    color: red;
+}
