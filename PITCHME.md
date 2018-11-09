@@ -90,6 +90,9 @@ Rust Vs C
   <tr class="fragment">
     <td> Macro </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
   </tr>
+  <tr class="fragment">
+    <td> Closures </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
+  </tr>
 </table>
 @snapend
 
@@ -268,21 +271,63 @@ A struct type is a heterogenous product of other types, called the **fields**
 of the type.
 
 Memory layout of a struct is undefined by default to allow for optimizations,
-nevertheless it can be fixed using the @color[blue](#[repr(...)]) attribute.
+nevertheless it can be fixed using the **#[repr(...)]** attribute.
 
-+++
+```rust
+pub struct Point3d {
+	pub x: i32;
+	pub y: i32;
+	transform: i64;
+}
 
-Constructing struct type
-========================
+Point {x: 10.0, y: 20.0};
+struct NothingInMe; // unit like struct
+NothingInMe {} // expression;
+TuplePoint(10.0, 20.0);
+TuplePoint { 0: 10.0, 1: 20.0 };
 
-Fields may be given in any order in a struct expression and
-the resulting struct value will always have the same memory
-layout.
+let u = game::User {name: "Joe", age: 35, score: 100_000};
+some_fn::<Cookie>(Cookie);
 
-+++
+struct Point3d { x: x, y: y_value, z: z };
+struct Point3d { x, y: y_value, z };
 
-Operations on struct type
-=========================
+let base = Point3d {x: 1, y: 2, z: 3};
+Point3d {y: 0, z: 10, .. base};
+
+```
+
+@[1-5](Struct declaration. Fields of a struct can be qualified by visibility modifier, here **x** and **y** are publicly visible items, but **transform** is private to struct)
+@[7](In a struct expression, fields may be given in any order and the resulting struct value will always have the same memory layout.)
+@[8-9](A unit-like struct type is like a struct type, except that it has no fields.)
+@[16-17](STRUCT FIELD INIT SHORTHAND.)
+@[19-20](SHORTHAND NOTATION FOR CONSTRUCTING PARTIALLY MODIFIED STRUCT.)
+
+---
+
+Enumerated types
+================
+
+```rust
+enum Message {
+	Quit,
+	WriteString(String),
+	Move{x: i32, y: i32},
+}
+
+let q = Message::Quit;
+let w = Message::WriteString("Some string".to_string());
+let m = Message::Move { x: 50, y: 200 };
+```
+
+@ul
+- An enumerated type is a nominal, heterogeneous disjoint union type, denoted by the name of an enum item.
+- An **enum item** declares both the type and a number of variants, each of which is independently named and each variant has the syntax of a **struct**, **tuple struct** or **unit-like struct**.
+- Any enum value consumes as much memory as the largest variant for its corresponding enum type, as well as the size needed to store a discriminant.
+@ulend
+
+@[1-3](Declaring an enumerated type and its variants.)
+@[6-8](Enumeration variants can be constructed similarly to structs, using a path to an enum variant instead of to a struct.)
 
 ---
 
