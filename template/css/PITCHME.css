@@ -318,6 +318,9 @@
 .reveal div {
     font-size: 0.75em !important;
 }
+.reveal table {
+    font-size: 0.75em !important;
+}
 .text-crimson {
     color: crimson !important;
 }
@@ -330,6 +333,7 @@
 }
 div.slide1 h1 {
     text-align: center !important;
+    font-size: 5em !important;
 }
 code.hljs {
     font-size: 90% !important;
@@ -357,6 +361,41 @@ ul.para {
 .text-blue {
     color: blue;
 }
+.text-gray {
+    color: gray;
+}
+.text-brown {
+    color: brown;
+}
 .text-red {
     color: red;
+}
+.slide-whitespace table tr {
+  opacity: 0;
+  visibility: hidden;
+  transition: all .2s ease;
+}
+table.south-west {
+    position: fixed;
+    bottom: 35px;
+    left: 0px;
+    text-align: left;
+}
+table.items-left {
+    position: fixed;
+    top: 5em;
+    left: 5em;
+    text-align: left;
+}
+table.items-right {
+    position: fixed;
+    top: 5em;
+    right: 5em;
+    text-align: right;
+}
+div.module-tree {
+    position: fixed;
+    top: 8em;
+    right: 1em;
+    text-align: right;
 }

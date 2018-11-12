@@ -2,9 +2,9 @@
 
 @snap[midpoint slide1 span-60]
 <h1>Rust</h1>
-@size[80%](The next generation systems language) <br/> <br/>
-@size[80%](@color[blue](C) @color[](genesis circa-1970)) <br/>
-@size[80%](@color[brown](Rust) @color[](genesis circa-2010)) <br/>
+The next generation systems language <br/> <br/>
+@color[blue](C) @color[](genesis circa-1970) <br/>
+@color[brown](Rust) @color[](genesis circa-2010) <br/>
 @snapend
 
 
@@ -14,28 +14,21 @@
 
 ---
 
-Introduction
-============
+Abstract: Rust and C
+====================
 
-@ul[para]
-- Rust is essentially a @color[blue](type system framework), with many features, that one might expect to be part of the language, can be implemented as library.
-@ulend
+Rust happens to carry forward all the goodness of C and avoiding,
+as much as possible, its pitfalls, corner-cases and legacy issues.
+Rust maintains the C like philosophy through and through, to
+enable programmers with small, but powerful set of features that can
+inter-play with each other seamlessly, unlike C++ large collection
+of features that stick out.
 
-@ul[para]
-- The compilation unit of rust program is called a @color[blue](crate), where crates can be further organised as @color[blue](modules), in separate @color[blue](files) and @color[blue](directories).
-@ulend
-
----
-
-Rust Vs C
-==========
 <style> table th, table td { text-align: center !important; } </style>
-<style> table { font-size: 90% } </style>
 
-@snap[west span-50]
-<table>
+<table class="south-west">
   <tr class="fragment">
-    <th style="color: blue;"> Compared </th> <th> C </th> <th> Rust </th>
+    <th style="color: blue;"> Feature </th> <th> C </th> <th> Rust </th>
   </tr>
   <tr class="fragment">
     <td> Hardware access </td> <td class="text-blue"> Y </td> <td class="text-blue"> Y </td>
@@ -58,16 +51,14 @@ Rust Vs C
   <tr class="fragment">
     <td> Standard Library </td> <td class="text-blue"> Y </td> <td class="text-blue"> Y </td>
   </tr>
-</table>
-@snapend
-
-@snap[east span-50]
-<table>
-  <tr class="fragment">
-    <th style="color: blue;"> Advantage </th> <th> C </th> <th> Rust </th>
-  </tr>
   <tr class="fragment">
     <td> Memory safety </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
+  </tr>
+</table>
+
+<table class="south-east">
+  <tr class="fragment">
+    <th style="color: blue;"> Feature </th> <th> C </th> <th> Rust </th>
   </tr>
   <tr class="fragment">
     <td> Type inference </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
@@ -94,22 +85,139 @@ Rust Vs C
     <td> Closures </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
   </tr>
 </table>
-@snapend
+
+---
+
+Introduction
+============
+
+@ul[para]
+- Rust is essentially a @color[blue](type system framework), with many features, that one might expect to be part of the language, can be implemented as library.
+@ulend
+
+@ul[para]
+- The compilation unit of rust program is called a @color[blue](crate), where crates can be further organised as @color[blue](modules), in separate @color[blue](files) and @color[blue](directories).
+@ulend
+
+@ul[para]
+- A single rust program, treated as a compilation unit, also called as a crate is made up of @color[blue](items) and @color[blue](attributes).
+@ulend
+
+@ul[para]
+- An @color[blue](item) is a component of a crate that are organised withing the crate by a nested set of modules.
+@ulend
+
+@ul[para]
+- An @color[blue](attribute) is free-form metadatum on an item, that can be used to control the compiler's interpretation of the item.
+@ulend
+
++++
+
+Hello world
+===========
+
+<br/>
+
+```rust
+fn main() {
+	println!("hello world");
+}
+```
+
+@[1](main function returns unit type **(\)**)
+@[2](o/p: hello world)
+
++++
+
+Hello world, another version
+============================
+
+<br/>
+
+```rust
+fn main() -> io::Result<()> {
+	println!("hello world");
+	Ok(());
+}
+```
+
+@[1](main function returns **Result<(\),io::Error>**)
+@[2](o/p: hello world)
+
++++
+
+Executing as script
+===================
+
+Rust programs can be executed as a script.
+
+```rust
+#!/usr/bin/env rustx
+
+fn main() {
+    println!("Hello world!");
+}
+```
+
+@[1](indicates that this rust program to be executed as a script)
+@[4](o/p: Hello world!)
 
 ---
 
 Keywords
 ========
 
-Rust keywords are identifier tokens that have special meaning. They can generally
-be classified between:
+Rust keywords are identifier tokens that have special meaning. Keywords can
+generally be classified between:
 
-* **control flow** - break, continue, if, else, fn, return, loop, for, while, match
-* **data** - false, true, box, const, let, mut, move, ref, self, static
-* **type** - enum, Self, type, struct, trait, unsafe, where, union, impl
-* **compiler** - crate, extern, mod, pub, super, self, use
+@ul
+* **control flow** - @color[gray](break continue if else fn return loop for while match)
+* **data** - @color[gray](false true box const let mut move ref self static)
+* **type** - @color[gray](enum Self type struct trait unsafe where union impl)
+* **compiler** - @color[gray](crate extern mod pub super self use)
+@ulend
 
-+++
+---
+
+Data keywords
+=============
+
+Keywords reserved for data, literals, and its semantics.
+
+@ul
+* **false, true** - boolean data.
+* **box** - allocate memory in heap and copies value into it.
+* **let** - irrefutable variable binding, used to declare local variables.
+* **ref** - reference to value (similar to pointers, but safe to use).
+* **mut** - denote data as mutable (by default data is immutable).
+* **move** - move semantics ...
+* **self** - method receiver, similar to [this][this] in C++.
+* **const** - data to be used as constant values.
+* **static** - lifetime denotes the entire lifepsan of a program.
+@ulend
+
+[this]: https://www.geeksforgeeks.org/this-pointer-in-c/
+
+---
+
+Type keywords
+=============
+
+Keywords reserved for rust type system.
+
+@ul
+* **type** - create type aliases
+* **struct** - heterogeneous collection of types, similar to tuples
+* **union** - all items in a union share common storage space.
+* **enum** - enumerated types, from value enumeration to type enumeration
+* **trait** - define a collection of behaviours that can be implemented by types
+* **impl** - implementing types and traits
+* **where** - to declare constraints on types and traits
+* **unsafe** - declare a type or block of code as unsafe
+* **Self** - inside **impl** and **trait** denotes the implementing type
+@ulend
+
+---
 
 Control keywords
 ================
@@ -126,51 +234,14 @@ Keywords reserved for control flow of a rust program.
 * **return** - early return from a function block.
 @ulend
 
-+++
-
-Data keywords
-=============
-
-Keywords reserved for data, literals, and its semantics.
-
-@ul
-* **false, true** - boolean data.
-* **box** - to allocate memory in heap and copies value into it.
-* **let** - irrefutable variable binding, used to declare local variables.
-* **ref** - reference to value (similar to pointers, but safe to use).
-* **mut** - denote data as mutable (by default data is immutable).
-* **move** - move semantics ...
-* **self** - method receiver.
-* **const** - data to be used as constant values.
-* **static** - live for the entire lifetime of the program.
-@ulend
-
-+++
-
-Type keywords
-=============
-
-Keywords reserved for rust type system.
-
-@ul
-* **type** - create type aliases
-* **struct** - heterogeneous collection of types, similar to tuples
-* **union** - all items in a union share common storage space.
-* **enum** - enumerated types, from value enumeration to type enumeration
-* **trait** - define a collection of behaviours that can be implemented by types
-* **impl** - implementing types and traits
-* **where** - to declare constraints on types and traits
-* **unsafe** - declare a type or block of code as unsafe
-* **Self** - type of method receivers
-@ulend
-
-+++
+---
 
 Compiler keywords
 =================
 
 Keywords reserved for compiler action.
 
+@ul
 * **crate** - unit of rust program than can be built into binary or library
 * **extern** - linkage with other crates
 * **mod** - organise rust crate into files and directories
@@ -178,6 +249,7 @@ Keywords reserved for compiler action.
 * **super** - parent module
 * **self** - current module
 * **use** - bringing items from other crates/modules into local scope.
+@ulend
 
 ---
 
@@ -198,26 +270,447 @@ Similar to symbols in C, used to name items in a rust program. Like,
 - Crate-name
 @ulend
 
-+++
+---
 
 Identifier rules
 ================
 
 * First character is a letter
-* Remaining characters are alphanumeric or @color[blue](_).
+* Remaining characters are @color[gray](_alphanumeric_) or @color[gray](_).
 
-Regex: @color[blue]([A-Za-z][A-Za-z0-9_]*)
+Regex: @color[gray]([A-Za-z][A-Za-z0-9_]*)
 
-Identifier can also start with @color[blue](_) as first character,
+@snap[fragment mt20]
+Identifier can also start with @color[gray](_) as first character,
 in which case:
+@snapend
 
-* If the identifier is named as @color[blue](_), it is typically
-  used to ignore a variable binding in pattern matching.
-* Otherwise if the identifier
- starts with @color[blue](_), will prevent compiler errors if such identifiers are left unused in its scope.
+@ul[mt20]
+* If the identifier is named as @color[gray](\_), it is typically used to ignore a variable binding in pattern matching.
+* Otherwise if the identifier starts with @color[gray](\_), will prevent compiler errors if such identifiers are left unused in its scope.
+@ulend
 
+@snap[fragment mt20]
 Note that in the later case the move/copy semantics are still applicable,
 while move/copy are not applicable in the former case.
+@snapend
+
+---
+
+Comments
+========
+
+@ul
+- Comments can either be **non-document comments**.
+- Or, it can be **document comments**.
+@ulend
+
+@snap[fragment mt20]
+**Non-document comments** in Rust code follow the general C++ style of line
+@color[gray](//) and block @color[gray](/\* ... \*/) comment forms.
+@snapend
+
+@ul
+- Nested block comments are supported.
+- Non-doc comments are interpreted as a form of whitespace.
+@ulend
+
+@snap[fragment mt20]
+Similar to non-document comments, **document comments** have two forms.
+@snapend
+
+@ul[mt20]
+- Line doc comments @color[gray](///).
+- Block doc comments @color[gray](/\*\* ... \*/).
+- Document comments are essentially shortcut for @color[gray](#[doc="..."]).
+- There is a variant to the two forms of document-comments
+  -  Line comments of the form @color[gray](//!)
+  -  Block comments of the form @color[gray](/*! ... */)
+  - They are doc comments that apply to the parent of the comment, rather than the item that follows. That is, they are equivalent to writing @color[gray](#![doc="..."]) around the body of the comment.
+  - @color[gray](//!) comments are usually used to document modules that occupy a source file.
+@ulend
+
+---
+
+Whitespace
+==========
+
+List of whitespace token allowed in a rust program
+
+|                                      |                              |
+|--------------------------------------|------------------------------|
+| U+0009 (horizontal tab, '\t')        | U+0085 (next line)           |
+| U+000A (line feed, '\n')             | U+200E (left-to-right mark)  |
+| U+000B (vertical tab)                | U+200F (right-to-left mark)  |
+| U+000C (form feed)                   | U+2028 (line separator)      |
+| U+000D (carriage return, '\r')       | U+2029 (paragraph separator) |
+| U+0020 (space, ' ')                  |                              |
+
+@ul[mt20]
+- Rust is a "free-form" language.
+- Rust program has identical meaning if each whitespace element.
+- Non-document comments are treated as whitespace.
+@ulend
+
+---
+
+Crates and Modules
+==================
+
+An example crate:
+
+```rust
+type Point = (i32,i32)
+
+pub mod example_module {
+	pub mod nested_module {
+	}
+}
+```
+
+@ul[mt20]
+- The compilation model centers on artifacts called crates,
+- Each compilation processes a single crate in source form, and produces an executable or library.
+- A crate handles linking, versioning, distribution and runtime loading.
+- A crate contains a root module, called anonymous module and a tree of nested module scopes.
+- Rust source files always end with **.rs** extension.
+- A crate that contains the **main()** function can be compile to an executable.
+@ulend
+
+@[3](nested module **example_module** that can be refered as <crate-name>::example_module)
+@[4](nested module **example_module** that can be refered as <crate-name>::example_module::nested_module)
+
+---
+
+Inventory of Items
+==================
+
+<table class="items-left">
+<tr><td class="text-brown"> type definitions </tr></td>
+<tr><td class="text-brown"> struct definitions </tr></td>
+<tr><td class="text-brown"> enumeration definitions </tr></td>
+<tr><td class="text-brown"> union definitions </tr></td>
+<tr><td class="text-green"> function definitions </tr></td>
+<tr><td class="text-green"> trait definitions  </tr></td>
+<tr><td class="text-green"> implementations  </tr></td>
+</table>
+
+<table class="items-right">
+<tr><td class="text-blue"> module </tr></td>
+<tr><td class="text-blue"> extern crate declaration  </tr></td>
+<tr><td class="text-blue"> use declarations </tr></td>
+<tr><td class="text-blue"> extern blocks </tr></td>
+<tr><td class="text-gray"> constant items </tr></td>
+<tr><td class="text-gray"> static items </tr></td>
+</table>
+
+---
+
+Modules
+=======
+
+```rust
+mod math {
+    type Complex = (f64, f64);
+    fn sin(f: f64) -> f64 {
+        /* ... */
+    }
+    fn cos(f: f64) -> f64 {
+        /* ... */
+    }
+    fn tan(f: f64) -> f64 {
+        /* ... */
+    }
+}
+```
+
+@ul[mt20]
+- A module is a container for zero or more items.
+- Modules and types share the same namespace. This means in the same scope, types cannot have same name as the module.
+- Items brought into scope with use also have this restriction.
+- Every source file is a module, but not every module needs a source file.
+@ulend
+
+---
+
+Modules, Files and Directories
+==============================
+
+As mentioned earlier a crate source can have its items organised in
+module heirarchy. Extending on that, there is a nifty way to map module
+name into file-name and directory name and there by organising code
+in multiple files and directories:
+
+<style> pre { width: 70% !important; } </style>
+
+```rust
+mod vec; // Load the `vec` module from `vec.rs`
+mod util; // Load from util/mod.rs
+mod thread {
+    // Load the `local_data` module from `thread/local_data.rs`
+    // or `thread/local_data/mod.rs`.
+    mod local_data;
+}
+```
+
+@snap[module-tree]
+![TREE](assets/module-tree.png)
+@snapend
+
+@[1](A module without a body is loaded from an external file, by default with the same name as the module, plus the .rs extension.)
+@[2](If module name is matching with a directory, then load from a default module called **mod.rs** under the matching directory path, typically every directory should contain a **mod.rs** that further declares each file under the directory as a module.)
+@[6](When a directory does not have a mod.rs, then the parent module can include files under sub-directories by nested module declaration.)
+
+---
+
+Extern crates
+=============
+
+```rust
+extern crate pcre;
+extern crate std; // equivalent to: extern crate std as std;
+extern crate std as ruststd; // linking to 'std' under another name
+```
+
+@ul[mt20]
+- An extern crate declaration specifies a dependency on an external crate.
+- The external crate is resolved to a specific **soname** at compile time, and a runtime linkage requirement to that soname is passed to the linker for loading at runtime.
+- The soname is resolved at compile time by scanning the compiler's library path.
+- When naming Rust crates, hyphens are disallowed. However, @color[blue](Cargo) packages may make use of them. In such case, Cargo will transparently replace @color[blue](-) with @color[blue](\_).
+@ulend
+
+@[1](The external crate **pcre** is bound into the declaring scope as **pcre** provided.)
+@[2](Equivalent to - extern crate std as std;)
+@[3](Possible to give different bound name.)
+
+---
+
+Use declaration
+===============
+
+```rust
+use a::b::{c, d, e::f, g::h::i};
+use a::b::{self, c, d::e};
+use p::q::r as x;
+use a::b::{self as ab, c as abc};
+use a::b::*;
+use a::b::{self as ab, c, d::{*, e::f}};
+
+use std::option::Option::{Some, None};
+use std::collections::hash_map::{self, HashMap};
+
+fn main() {
+    let x = vec![Some(1.0f64), None];
+    let map1 = HashMap::new();
+    let map2 = hash_map::HashMap::new();
+}
+```
+
+@ul[mt20]
+- A use declaration creates one or more local name bindings synonymous with some other path.
+- Usually a use declaration is used to shorten the path required to refer to a module item.
+- The conventions is to place these declarations at the top of modules and blocks.
+- Note that, use declarations do not declare linkage dependancy with external crates.
+@ulend
+
+@[1](Simultaneously binding a list of paths with a common prefix, using the glob-like brace syntax.)
+@[2](Simultaneously binding a list of paths with a common prefix and their common parent module, using the self keyword.)
+@[3](Rebinding the target name as a new local name.)
+@[4](Rebinding with glob-like syntax.)
+@[5](Binding all paths matching a given prefix, using the asterisk wildcard syntax.)
+@[6](Nesting groups of the previous features multiple times.)
+@[12](Equivalent to 'vec![std::option::Option::Some(1.0f64), std::option::Option::None];')
+@[13-14](Both `hash_map` and `HashMap` are in scope.)
+
+---
+
+Use: visibility and re-export
+===============================
+
+```rust
+mod quux {
+    pub use quux::foo::{bar, baz};
+
+    pub mod foo {
+        pub fn bar() { }
+        pub fn baz() { }
+    }
+}
+```
+
+@ul[mt20]
+- Like items, use declarations are private to the containing module, by default.
+- Also like items, a use declaration can be public, if qualified by the **pub** keyword.
+- Such a use declaration serves to re-export a name.
+- A public use declaration can therefore redirect some public name to a different target definition.
+- As a curious case, a definition with a private canonical path, inside a different module, can be re-exported as public item.
+- If a sequence of use redirections form a cycle or cannot be resolved unambiguously, they represent a compile-time error.
+- The general convention is to have top-level module declarations at the crate root, so that direct usage of the declared modules is possible within use items.
+@ulend
+
+@[2](Note that the paths contained in use items are relative to the crate root. So, the use refers to quux::foo::{bar, baz}, and not simply to foo::{bar, baz}.)
+
++++
+
+Use declaration: Example
+========================
+
+```rust
+use foo::baz::foobaz;    // good: foo is at the root of the crate
+mod foo {
+    mod example {
+        pub mod iter {}
+    }
+    use foo::example::iter; // good: foo is at crate root
+    use example::iter;      // bad:  example is not at the crate root
+    use self::baz::foobaz;  // good: self refers to module 'foo'
+    use foo::bar::foobar;   // good: foo is at crate root
+    pub mod bar {
+        pub fn foobar() { }
+    }
+    pub mod baz {
+        use super::bar::foobar; // good: super refers to module 'foo'
+        pub fn foobaz() { }
+    }
+}
+```
+@[1](good: foo is at the root of the crate.)
+@[6](good: foo is at crate root.)
+@[7](bad:  example is not at the crate root.)
+@[8](good: self refers to module **foo**.)
+@[9](good: foo is at crate root.)
+@[14](good: super refers to module **foo**.)
+
+---
+
+Inventory of types
+==================
+
+Primitive types:
+
+@ul
+- **Boolean type**
+- **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
+- **Floating point - f32, f64**
+- **Machine dependant integer types - isize, usize**
+- **Textual types - char, str**
+- **Never type !**
+@ulend
+
+@snap[mt20 fragment]
+Complex types:
+@snapend
+
+@ul[mt20]
+- **Structural type**
+- **Tuple type**
+- **Array type**
+- **Slice type**
+- **Function pointer**
+- **Reference**
+- **Pointer**
+@ulend
+
+---
+
+Literals
+========
+
+@ul
+- **Character** and **String** literals.
+
+---
+
+Literals: Character and Strings
+===============================
+
+|				   | Example	| Characters	| Escapes
+|---------------   |------------|---------------|-----------------------
+| Character		   | 'H'		| All Unicode	| Quote & ASCII & Unicode
+| String		   | "hello"	| All Unicode	| Quote & ASCII & Unicode
+| Raw			   | r#"hello"#	| All Unicode	| N/A
+| Byte			   | b'H'		| All ASCII		| Quote & Byte
+| Byte string	   | b"hello"	| All ASCII		| Quote & Byte
+| Raw byte string  | br#"hello"#| All ASCII		| N/A
+
+@ul[mt20]
+- ASCII escapes are **\n**, **\r**, **\t**, **\\\\**, **\0**, finally any 7-bit character code (upto 0x7F) can be escaped as **\x..**
+- Byte escapes are **\n**, **\r**, **\t**, **\\\\**, **\0**, finally any 8-bit character code can be escaped as **\x..**
+- Unicode escapes are **\u{xxxxxx}** for 24-bit unicode character code.
+- Quote escapes are **\'** and **\"**.
+@ulend
+
+---
+
+Literals: Numbers
+=================
+
+| Type 			  | Example		| Exponentiation| Suffixes
+|-----------------|-------------|---------------|-----------------------
+| Decimal integer | 98_222		| N/A			| Integer suffixes
+| Hex integer	  | 0xff		| N/A			| Integer suffixes
+| Octal integer	  | 0o77		| N/A			| Integer suffixes
+| Binary integer  | 0b1111_0000	| N/A			| Integer suffixes
+| Floating-point  | 123.0E+77	| Optional		| Floating-point
+
+@ul[mt20]
+- All number literals allow **_ **as a visual separator: __1_234.0E+18f64__
+- Integer suffixes - u8, i8, u16, i16, u32, i32, u64, i64, u128, i128, usize, isize
+- Floating point suffixes - f32, f64
+- By default integers are infered as **i32**.
+- By default float is infered as **f32**.
+@ulend
+
+---
+
+Literals: Boolean
+=================
+
+Tokens **true** and **false** are treated as boolean literal to be used
+as boolean-true and boolean-false respectively.
+
+---
+
+Literals: Lifetimes and loop-labels
+===================================
+
+---
+
+Operators
+=========
+
+Data operators:
+
+@ul
+* Arithmetic operators - ** +  - \* / % **
+* Bitwise operators, ** >> << & | ^ ! **
+* Assignment operator, ** = **
+* Logical operator, ** & | ^ ! && || **
+* Comparison operator, ** == != < <= > >=  **
+* Assignment operator can be combined with arithmetic and bitwise operators
+@snapend
+
+@ulend
+
+@snap[fragment mt20]
+Other operators:
+@snapend
+
+@ul
+* **@** Subpattern binding
+* **_** Placeholder patterns, Inferred-types
+* **.** Field-access, Tuple-index
+* **..** Range, Struct-Expression, Wildcard-Patterns
+* **...** Variadic-functions
+* **..=** Inclusive-range
+* **, :** used as separator in various places
+* **;** Statement-terminator, Item-terminator, Array-type
+* **::** Path-separator
+* **->** Function-return, Closure-return
+* **#** Attributes
+* **$** Macros
+* **?** Question-mark-operator, Questionably sized
+@ulend
 
 ---
 
@@ -331,6 +824,115 @@ let m = Message::Move { x: 50, y: 200 };
 
 ---
 
+Path
+====
+
+```rust
+x;
+x::y::z;
+type T = HashMap<i32,String>; // Type arguments used in a type expression
+let x  = id::<i32>(10);       // Type arguments used in a call expression
+```
+
+@snap[fragment mt20]
+A path is a sequence of one or more path components logically separated
+by a namespace qualifier <b>::</b>
+@snapend
+
+@ul[mt20]
+- If a path consists of only one component, it refers to either an item or a variable in a local control scope.
+- If a path has multiple components, it always refers to an item.
+- A path component is usually an identifier.
+@ulend
+
+@snap[fragment mt20]
+The meaning of how a path is resolved can be changed with various <b>leading qualifiers</b>.
+@snapend
+
+@ul[mt20]
+- **::** paths starting with <em>::</em> shall be resolved from crate root.
+- **super** paths starting with <em>super</em> begin resolution relative to the parent module.
+- **self** paths starting with <em>self</em> begin resolution relative to the current module.
+@ulend
+
+
+@[1](path refers a local variable.)
+@[2](path refers to an item **z** in a //module// or //type// or //Enumeration// or //trait// **x** and **y**.)
+@[3](path refer to a type **HashMap** parametrised over //i32// and //String//.)
+@[4](Sometimes a path component might be of the form **<...>** to disabmbiguate the type or trait being refered to.)
+
++++
+
+Path Resolution
+===============
+
+```rust
+mod b {
+    pub fn foo() {
+        ::a::foo();
+        super::a::foo();
+    }
+	fn bar() {
+		self::foo();
+	}
+}
+```
+
+@[3](call a's foo function, resolving from crate root)
+@[4](call a's foo function, resolving using super)
+@[7](call a's foo function, resolving using self)
+
++++
+
+Path Example
+============
+
+```rust
+extern crate rand;
+use std::option::Option::{Some, None};
+type Point = (i32, i32);
+enum Message {
+	Put,
+	Get,
+}
+union Union;
+const BIT1: u32 = 1 << 0;
+static mut LEVELS: u32 = 0;
+
+mod a {
+    pub fn foo() {}
+    pub struct Struct;
+    pub trait Trait {
+        fn f(&self);
+    }
+    impl Trait for Struct {
+        fn f(&self) {} // <::a::Struct as ::a::Trait>::f
+    }
+    impl Struct {
+        fn g(&self) {} // <::a::Struct>::g
+    }
+}
+```
+
+@[1](extern-crate canonical path - ::rand)
+@[2](use declaration don't have canonical path)
+@[3](type canonical path - ::Point)
+@[4](enum canonical path - ::Message)
+@[5](enum variant canonical path - ::Message::Put)
+@[8](union canonical path - ::Union)
+@[9](constant canonical path - ::BIT1)
+@[10](static canonical path - ::LEVELS)
+@[12](module canonical path - ::a)
+@[13](function canonical path - ::a::foo)
+@[14](struct canonical path - ::a::Struct)
+@[15](trait canonical path - ::a::Trait)
+@[16](method canonical path - ::a::Trait::f)
+@[18](implementation don't have canonical path)
+@[19](method disambiguation - <::a::Struct as ::a::Trait>::f)
+@[22](method canonical path - <::a::Struct>::g)
+
+---
+
 Visibility and privacy
 ======================
 
@@ -367,7 +969,7 @@ accessing an item:
 - If an item is private, it may be accessed by the current module and its descendants.
 @ulend
 
-+++
+---
 
 Visibility case: helper functions
 =================================
@@ -386,7 +988,7 @@ mod crate_helper_module {
 @[2](This function can be used by anything in the current crate.)
 @[3](This function *cannot* be used by anything else in the crate. It is not publicly visible outside of the `crate_helper_module`, so only this current module and its descendants may access it.)
 
-+++
+---
 
 Visibility case: library APIs
 =============================
@@ -415,7 +1017,7 @@ pub mod submodule {
 @[4](can use crate_helper_module which is invisible external to crate, note that to make use of a visible item in a scope, it must first be imported to the local scope using the **use** declaration.)
 @[10](This function is hidden to any module which is not a descendant of `submodule`.)
 
-+++
+---
 
 Visibility case: unit testing
 =============================
@@ -463,7 +1065,7 @@ as visible within a given scope. The rules for pub restrictions are as follows:
 * **pub(self)** makes an item visible to the current module. This is equivalent to pub(in self).
 @ulend
 
-+++
+---
 
 Visibility: Example
 ===================
@@ -569,7 +1171,42 @@ BitAnd, BitOr
 
 ---
 
-Crate, Modules, files and directories.
 Move semantics
+Pattern matching
+Refutable bindings and Irrefutable bindings
+
+Parametric Types
+Enumerated types
+Lifetimes - static, stack, heap
+Safety
+Mono-morphisation
+Macro
+Closure
+
+Crate, Modules, files and directories.
+
+Attributes
+
+#[doc="..."]
+#![crate_name = "projx"] // Specify the crate name.
+#![crate_type = "lib"] // Specify the type of output artifact.
+#![warn(non_camel_case_types)] // Turn on a warning.
+#[path = "thread_files"]
+mod thread {
+    // Load the `local_data` module from `thread_files/tls.rs`
+    #[path = "tls.rs"]
+    mod local_data;
+}
+
 What are the limitations of user defined types ?
-How to escape markdown syntax ?
+Are there any special significance attached to main.rs ?
+Are there any special significance attached to lib.rs ?
+
+---
+
+traits
+
+Auto-traits :
+Core-traits :
+
+Termination
