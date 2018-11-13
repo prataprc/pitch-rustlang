@@ -1,8 +1,8 @@
-@title[Rust introduction]
+@title[Safety in Rust]
 
 @snap[midpoint slide1 span-60]
-<h1>Introducing Rust</h1>
-From boot-loaders to browser applications.
+<h1>Safe Programming</h1>
+Saftey as in crash-free.
 @snapend
 
 
@@ -12,10 +12,40 @@ From boot-loaders to browser applications.
 
 ---
 
-Why Rust ?
-==========
+Dangling pointers
+=================
 
-- Gives full control over memory and execution behaviour, similar to C/C++
-- No Garbage-Collection, but guaranteed safety.
-- No dangling pointers, no double free.
-- Fearless concurrency, no data-races.
+---
+
+Double free
+===========
+
+---
+
+NULL Pointers
+=============
+
+---
+
+Pointer arithmetic
+==================
+
+---
+
+Index overflow
+==============
+
+---
+
+Generic type and operation
+==========================
+
+---
+
+Type coercion
+=============
+
+---
+
+Data race
+=========
