@@ -14,15 +14,38 @@ The next generation systems language <br/> <br/>
 
 ---
 
-Abstract: Rust and C
-====================
+Why Rust ?
+==========
+
+<table>
+<tr><th> Doing what    </th> <th> Rust     </th> <th> C        </th> <th> Python   </th> <th> Java     </th> <th> Golang   </th> <th> C#       </th> <th> Swift    </th> <th> js       </th> </tr>
+<tr><td> Boot loader   </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
+<tr><td> Firmware      </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
+<tr><td> Kernel        </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
+<tr><td> Script        </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> </tr>
+<tr><td> Middleware    </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr><td> Algorithms    </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr><td> Database      </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> </tr>
+<tr><td> Web-stack     </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr><td> Browser       </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td> &#10004; </td> </tr>
+<tr><td> Windows       </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> </tr>
+<tr><td> OSX           </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr><td> Android / iOS </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> </tr>
+</table>
+
+In case of Rust some of the capabilities are work in progress, but are very much possible.
+
+---
+
+Rust and C
+==========
 
 Rust happens to carry forward all the goodness of C and avoiding,
 as much as possible, its pitfalls, corner-cases and legacy issues.
-Rust maintains the C like philosophy through and through, to
-enable programmers with small, but powerful set of features that can
-inter-play with each other seamlessly, unlike C++ large collection
-of features that stick out.
+Unlike C++'s large collection of features that stick out, Rust maintains
+the C like philosophy through and through, to enable programmers with
+small, but powerful set of features that can inter-play with each
+other seamlessly.
 
 <style> table th, table td { text-align: center !important; } </style>
 
@@ -177,7 +200,7 @@ generally be classified between:
 * **compiler** - @color[gray](crate extern mod pub super self use)
 @ulend
 
----
++++
 
 Data keywords
 =============
@@ -198,7 +221,7 @@ Keywords reserved for data, literals, and its semantics.
 
 [this]: https://www.geeksforgeeks.org/this-pointer-in-c/
 
----
++++
 
 Type keywords
 =============
@@ -217,7 +240,7 @@ Keywords reserved for rust type system.
 * **Self** - inside **impl** and **trait** denotes the implementing type
 @ulend
 
----
++++
 
 Control keywords
 ================
@@ -234,7 +257,7 @@ Keywords reserved for control flow of a rust program.
 * **return** - early return from a function block.
 @ulend
 
----
++++
 
 Compiler keywords
 =================
@@ -259,15 +282,16 @@ Identifiers
 Similar to symbols in C, used to name items in a rust program. Like,
 
 @ul
-- Type-name, can be a tuple, struct, union, alias.
-- Field-name within struct and union
-- Variant-name within enumeration
-- Associated types
-- Function-name
-- Variable-name (local, constant, static)
-- Trait-name
-- Module-name
-- Crate-name
+- Type-name, can be a tuple, struct, union, alias. Convention is to start with uppercase and use camel-case. <br/> @color[blue](Example: struct BigInt { ... })
+- Local variable-name. Convention is to start with smallcase and use `_` as word separator. <br/> @color[blue](Example: struct BigInt { int64 upper\_half, int64 lower\_half })
+- Constants and static name. Convention is to use all UPPERCASE and use `_` as word separator. <br/> @color[blue](Example: const LIMIT_START = 100\_i32)
+- Field-name within struct and union. Convetion is same as local variable-name
+- Variant-name within enumeration. Convention is same as Type-name.
+- Associated types. Convention is same as Type-name
+- Function-name. Convention is same as local variable name.
+- Trait-name. Convention is same as type-name.
+- Module-name. Convention is same as local variable name.
+- Crate-name. Convention is same as local variable name.
 @ulend
 
 ---
@@ -354,6 +378,267 @@ List of whitespace token allowed in a rust program
 
 ---
 
+@title[Value]
+
+@snap[midpoint text-center]
+<h1 style="text-align: center !important;">Values</h1>
+<br/>
+All of programming is operating on values. In Rust, every value
+has a single, specific type but may implement several different traits,
+or be compatible with different type constaints.
+@snapend
+
+---
+
+Inventory of types
+==================
+
+Primitive types:
+
+@ul
+- **Boolean type**
+- **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
+- **Floating point - f32, f64**
+- **Machine dependant integer types - isize, usize**
+- **Textual types - char, str**
+- **Never type !**
+@ulend
+
+@snap[mt20 fragment]
+Complex types:
+@snapend
+
+@ul[mt20]
+- **Structural type**
+- **Tuple type**
+- **Array type**
+- **Slice type**
+- **Function pointer**
+- **Reference**
+- **Pointer**
+@ulend
+
+---
+
+Literals
+========
+
+@ul
+- **Character** and **String** literals.
+
+---
+
+Literals: Character and Strings
+===============================
+
+|				   | Example	| Characters	| Escapes
+|---------------   |------------|---------------|-----------------------
+| Character		   | 'H'		| All Unicode	| Quote & ASCII & Unicode
+| String		   | "hello"	| All Unicode	| Quote & ASCII & Unicode
+| Raw			   | r#"hello"#	| All Unicode	| N/A
+| Byte			   | b'H'		| All ASCII		| Quote & Byte
+| Byte string	   | b"hello"	| All ASCII		| Quote & Byte
+| Raw byte string  | br#"hello"#| All ASCII		| N/A
+
+@ul[mt20]
+- ASCII escapes are **\n**, **\r**, **\t**, **\\\\**, **\0**, finally any 7-bit character code (upto 0x7F) can be escaped as **\x..**
+- Byte escapes are **\n**, **\r**, **\t**, **\\\\**, **\0**, finally any 8-bit character code can be escaped as **\x..**
+- Unicode escapes are **\u{xxxxxx}** for 24-bit unicode character code.
+- Quote escapes are **\'** and **\"**.
+@ulend
+
+---
+
+Literals: Numbers
+=================
+
+| Type 			  | Example		| Exponentiation| Suffixes
+|-----------------|-------------|---------------|-----------------------
+| Decimal integer | 98_222		| N/A			| Integer suffixes
+| Hex integer	  | 0xff		| N/A			| Integer suffixes
+| Octal integer	  | 0o77		| N/A			| Integer suffixes
+| Binary integer  | 0b1111_0000	| N/A			| Integer suffixes
+| Floating-point  | 123.0E+77	| Optional		| Floating-point
+
+@ul[mt20]
+- All number literals allow **_ **as a visual separator: __1_234.0E+18f64__
+- Integer suffixes - u8, i8, u16, i16, u32, i32, u64, i64, u128, i128, usize, isize
+- Floating point suffixes - f32, f64
+- By default integers are infered as **i32**.
+- By default float is infered as **f32**.
+@ulend
+
+---
+
+Literals: Boolean
+=================
+
+Tokens **true** and **false** are treated as boolean literal to be used
+as boolean-true and boolean-false respectively.
+
+---
+
+Literals: Lifetimes and loop-labels
+===================================
+
+---
+
+@title[Types]
+
+@snap[midpoint text-center]
+<h1 style="text-align: center !important;">Types</h1>
+<br/>
+Every variable, item and value in Rust has a type. The type of a value defines
+the interpretation of the memory holding it.
+@snapend
+
+---
+
+Primitive types
+===============
+
+Some types are defined by the language, rather than as part of the
+standard library, these are called primitive types.
+
+@ul
+- **Boolean type** bool with values @color[blue](true, false).
+- **Integer machine types** unsigned word types @color[blue](u8, u16, u32, u64, u128), signed 2’s complement word types @color[blue](i8, i16, i32, i64, i128).
+- **Floating point** machine types @color[blue](f32, f64).
+- **Machine dependant integer types** with same number of bits as platform’s pointer type, used for indexing and pointer offset @color[blue](usize, isize).
+- **Textual types** @color[blue](char, str). Char is [unicode scalar value](http://www.unicode.org/glossary/#unicode_scalar_value) and @color[blue]([char]) is effectively an UCS4/UTF-32 array. Str is dynamically sized type that represents [utf8](https://en.wikipedia.org/wiki/UTF-8) encode string.
+- **Never type !**, expressions of type ! can be coerced into any other type.
+@ulend
+
+---
+
+Complex types
+=============
+
+@ul
+- Structural type
+- Tuple type
+- Array type
+- Slice type
+- Function pointer
+- Reference
+- Pointer
+@ulend
+
+---
+
+Type aliases
+============
+
+```rust
+type Point = (u8, u8);
+let p: Point = (41, 68);
+
+enum E { A }
+type F = E;
+let _: F = E::A;  // OK
+// let _: F = F::A;  // Doesn't work
+```
+
+- A type alias defines a new name for an existing type.
+
+@[1](defines the type Point as a synonym for the type \(u8, u8\).)
+@[4-7](A type alias to an enum type cannot be used to qualify the constructors.)
+
+---
+
+Structural type
+===============
+
+```rust
+struct Point {x: i32, y: i32}
+let p = Point {x: 10, y: 11};
+let px: i32 = p.x;
+
+struct Point(i32, i32);
+let p = Point(10, 11);
+let px: i32 = match p { Point(x, _) => x };
+
+struct Cookie;
+let c = [Cookie, Cookie {}, Cookie, Cookie {}];
+```
+
+@ul[mt20]
+- A struct type is a heterogenous product of other types, called the **fields** of the type.
+- Structural types can be defined in two forms **Tuple** and **struct**.
+- A **unit-like** struct is a struct without any fields, defined by leaving off the list of fields entirely.
+- Memory layout of a struct is undefined by default to allow for optimizations, nevertheless it can be fixed using the **#[repr(...)]** attribute.
+@ulend
+
+@[1](struct declaration.)
+@[2](struct construction.)
+@[3](struct expression.)
+@[5](tuple declaration.)
+@[6](tuple construction.)
+@[7](tuple expression.)
+@[9-10](unit-like struct.)
+
++++
+
+Struct examples
+===============
+
+```rust
+pub struct Point3d {
+	pub x: i32;
+	pub y: i32;
+	transform: i64;
+}
+
+Point {x: 10.0, y: 20.0};
+struct NothingInMe; // unit like struct
+NothingInMe {} // expression;
+TuplePoint(10.0, 20.0);
+TuplePoint { 0: 10.0, 1: 20.0 };
+
+let u = game::User {name: "Joe", age: 35, score: 100_000};
+some_fn::<Cookie>(Cookie);
+
+struct Point3d { x: x, y: y_value, z: z };
+struct Point3d { x, y: y_value, z };
+
+let base = Point3d {x: 1, y: 2, z: 3};
+Point3d {y: 0, z: 10, .. base};
+```
+
+@[1-5](Struct declaration. Fields of a struct can be qualified by visibility modifier, here **x** and **y** are publicly visible items, but **transform** is private to struct)
+@[7](In a struct expression, fields may be given in any order and the resulting struct value will always have the same memory layout.)
+@[8-9](A unit-like struct type is like a struct type, except that it has no fields.)
+@[16-17](STRUCT FIELD INIT SHORTHAND.)
+@[19-20](SHORTHAND NOTATION FOR CONSTRUCTING PARTIALLY MODIFIED STRUCT.)
+
+---
+
+Enumerated types
+================
+
+```rust
+enum Message {
+	Quit,
+	WriteString(String),
+	Move{x: i32, y: i32},
+}
+
+let q = Message::Quit;
+let w = Message::WriteString("Some string".to_string());
+let m = Message::Move { x: 50, y: 200 };
+```
+
+@ul
+- An enumerated type is a nominal, heterogeneous disjoint union type, denoted by the name of an enum item.
+- An **enum item** declares both the type and a number of variants, each of which is independently named and each variant has the syntax of a **struct**, **tuple struct** or **unit-like struct**.
+- Any enum value consumes as much memory as the largest variant for its corresponding enum type, as well as the size needed to store a discriminant.
+@ulend
+
+@[1-3](Declaring an enumerated type and its variants.)
+@[6-8](Enumeration variants can be constructed similarly to structs, using a path to an enum variant instead of to a struct.)
+
+---
+
 Crates and Modules
 ==================
 
@@ -379,6 +664,16 @@ pub mod example_module {
 
 @[3](nested module **example_module** that can be refered as <crate-name>::example_module)
 @[4](nested module **example_module** that can be refered as <crate-name>::example_module::nested_module)
+
+---
+
+@title[Items]
+
+@snap[midpoint text-center]
+<h1 style="text-align: center !important;">Items</h1>
+<br/>
+Rust program is organised as artifacts called items, and attributes that control the properties of specific item.
+@snapend
 
 ---
 
@@ -440,8 +735,6 @@ As mentioned earlier a crate source can have its items organised in
 module heirarchy. Extending on that, there is a nifty way to map module
 name into file-name and directory name and there by organising code
 in multiple files and directories:
-
-<style> pre { width: 70% !important; } </style>
 
 ```rust
 mod vec; // Load the `vec` module from `vec.rs`
@@ -583,96 +876,95 @@ mod foo {
 
 ---
 
-Inventory of types
-==================
+Functions
+=========
 
-Primitive types:
-
-@ul
-- **Boolean type**
-- **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
-- **Floating point - f32, f64**
-- **Machine dependant integer types - isize, usize**
-- **Textual types - char, str**
-- **Never type !**
-@ulend
-
-@snap[mt20 fragment]
-Complex types:
-@snapend
+```rust
+fn answer_to_life_the_universe_and_everything() -> i32 {
+    return 42;
+}
+fn first((value, _): (i32, i32)) -> i32 {
+    value
+}
+```
 
 @ul[mt20]
-- **Structural type**
-- **Tuple type**
-- **Array type**
-- **Slice type**
-- **Function pointer**
-- **Reference**
-- **Pointer**
+- Function's arguments are **irrefutable patterns**, similar to **let** bindings.
+- A function is conceptually wrapped in a block that binds the argument patterns and then returns the value of the function's block.
+- Tail expression of the a block, if evaluated, implicitly becomes the return value from the block.
+- An explicit return expression can be used, anywhere in the block, to short-circuit the implied tail-return.
 @ulend
 
 ---
 
-Literals
-========
-
-@ul
-- **Character** and **String** literals.
-
----
-
-Literals: Character and Strings
-===============================
-
-|				   | Example	| Characters	| Escapes
-|---------------   |------------|---------------|-----------------------
-| Character		   | 'H'		| All Unicode	| Quote & ASCII & Unicode
-| String		   | "hello"	| All Unicode	| Quote & ASCII & Unicode
-| Raw			   | r#"hello"#	| All Unicode	| N/A
-| Byte			   | b'H'		| All ASCII		| Quote & Byte
-| Byte string	   | b"hello"	| All ASCII		| Quote & Byte
-| Raw byte string  | br#"hello"#| All ASCII		| N/A
-
-@ul[mt20]
-- ASCII escapes are **\n**, **\r**, **\t**, **\\\\**, **\0**, finally any 7-bit character code (upto 0x7F) can be escaped as **\x..**
-- Byte escapes are **\n**, **\r**, **\t**, **\\\\**, **\0**, finally any 8-bit character code can be escaped as **\x..**
-- Unicode escapes are **\u{xxxxxx}** for 24-bit unicode character code.
-- Quote escapes are **\'** and **\"**.
-@ulend
-
----
-
-Literals: Numbers
+Generic functions
 =================
 
-| Type 			  | Example		| Exponentiation| Suffixes
-|-----------------|-------------|---------------|-----------------------
-| Decimal integer | 98_222		| N/A			| Integer suffixes
-| Hex integer	  | 0xff		| N/A			| Integer suffixes
-| Octal integer	  | 0o77		| N/A			| Integer suffixes
-| Binary integer  | 0b1111_0000	| N/A			| Integer suffixes
-| Floating-point  | 123.0E+77	| Optional		| Floating-point
+```rust
+fn foo<A, B>(x: A, y: B) {
+}
+
+// Trait bounds, using where syntax
+fn bar<T>(x: T) where T: Debug -> bool {
+	if mem::size_of::<T>() == 4 { return true }
+	return false
+}
+```
 
 @ul[mt20]
-- All number literals allow **_ **as a visual separator: __1_234.0E+18f64__
-- Integer suffixes - u8, i8, u16, i16, u32, i32, u64, i64, u128, i128, usize, isize
-- Floating point suffixes - f32, f64
-- By default integers are infered as **i32**.
-- By default float is infered as **f32**.
+- Function `foo` is parametrised over types `A` and `B`.
+- Inside the function signature and body, the name of the type parameter can be used as type-name.
+- Trait bounds can be specified for the type-parameters to allow methods from that trait to be called on the values.
+@[6](It is necessary, if there is not sufficient context to determine the type parameters, to supply the type parameters explicitly in a trailing path component after the function name.)
 @ulend
 
 ---
 
-Literals: Boolean
-=================
+Extern functions (FFI)
+======================
 
-Tokens **true** and **false** are treated as boolean literal to be used
-as boolean-true and boolean-false respectively.
+```rust
+extern fn new_i32() -> i32 { 0 }
+extern "stdcall" fn new_i32_stdcall() -> i32 { 0 }
+```
+
+@ul[mt20]
+- Provide the opposite functionality to external blocks which allow Rust code to call foreign code.
+- Also called as extern functions, can be called by foreign code.
+@ulend
+
+@[1](Declares an extern fn, the ABI defaults to "C".)
+@[2](Declares an extern fn with "stdcall" ABI.)
 
 ---
 
-Literals: Lifetimes and loop-labels
-===================================
+Function attributes
+===================
+
+```rust
+#[test] // Outer attributes are allowed on functions.
+fn test_function() {
+}
+fn test_another_function() {
+	!#[test] // Inner attributes are allowed immediately after the function signature.
+}
+```
+
+Attributes that are allowed on functions:
+
+@ul
+* cfg
+* deprecated
+* doc
+* export_name
+* link_section
+* no_mangle
+* allow, deny, forbid, warn
+* must_use
+* procedural macros
+* test
+* cold, inline
+@ulend
 
 ---
 
@@ -711,116 +1003,6 @@ Other operators:
 * **$** Macros
 * **?** Question-mark-operator, Questionably sized
 @ulend
-
----
-
-@title[types]
-
-@snap[midpoint text-center]
-<h1 style="text-align: center !important;">Types</h1>
-<br/>
-Every variable, item and value in Rust has a type. The type of a value defines
-the interpretation of the memory holding it.
-@snapend
-
----
-
-Primitive types
-===============
-
-Some types are defined by the language, rather than as part of the
-standard library, these are called primitive types.
-
-@ul
-- **Boolean type** bool with values @color[blue](true, false).
-- **Integer machine types** unsigned word types @color[blue](u8, u16, u32, u64, u128), signed 2’s complement word types @color[blue](i8, i16, i32, i64, i128).
-- **Floating point** machine types @color[blue](f32, f64).
-- **Machine dependant integer types** with same number of bits as platform’s pointer type, used for indexing and pointer offset @color[blue](usize, isize).
-- **Textual types** @color[blue](char, str). Char is [unicode scalar value](http://www.unicode.org/glossary/#unicode_scalar_value) and @color[blue]([char]) is effectively an UCS4/UTF-32 array. Str is dynamically sized type that represents [utf8](https://en.wikipedia.org/wiki/UTF-8) encode string.
-- **Never type !**, expressions of type ! can be coerced into any other type.
-@ulend
-
----
-
-Complex types
-=============
-
-@ul
-- Structural type
-- Tuple type
-- Array type
-- Slice type
-- Function pointer
-- Reference
-- Pointer
-@ulend
-
----
-
-Structural type
-===============
-
-A struct type is a heterogenous product of other types, called the **fields**
-of the type.
-
-Memory layout of a struct is undefined by default to allow for optimizations,
-nevertheless it can be fixed using the **#[repr(...)]** attribute.
-
-```rust
-pub struct Point3d {
-	pub x: i32;
-	pub y: i32;
-	transform: i64;
-}
-
-Point {x: 10.0, y: 20.0};
-struct NothingInMe; // unit like struct
-NothingInMe {} // expression;
-TuplePoint(10.0, 20.0);
-TuplePoint { 0: 10.0, 1: 20.0 };
-
-let u = game::User {name: "Joe", age: 35, score: 100_000};
-some_fn::<Cookie>(Cookie);
-
-struct Point3d { x: x, y: y_value, z: z };
-struct Point3d { x, y: y_value, z };
-
-let base = Point3d {x: 1, y: 2, z: 3};
-Point3d {y: 0, z: 10, .. base};
-
-```
-
-@[1-5](Struct declaration. Fields of a struct can be qualified by visibility modifier, here **x** and **y** are publicly visible items, but **transform** is private to struct)
-@[7](In a struct expression, fields may be given in any order and the resulting struct value will always have the same memory layout.)
-@[8-9](A unit-like struct type is like a struct type, except that it has no fields.)
-@[16-17](STRUCT FIELD INIT SHORTHAND.)
-@[19-20](SHORTHAND NOTATION FOR CONSTRUCTING PARTIALLY MODIFIED STRUCT.)
-
----
-
-Enumerated types
-================
-
-```rust
-enum Message {
-	Quit,
-	WriteString(String),
-	Move{x: i32, y: i32},
-}
-
-let q = Message::Quit;
-let w = Message::WriteString("Some string".to_string());
-let m = Message::Move { x: 50, y: 200 };
-```
-
-@ul
-- An enumerated type is a nominal, heterogeneous disjoint union type, denoted by the name of an enum item.
-- An **enum item** declares both the type and a number of variants, each of which is independently named and each variant has the syntax of a **struct**, **tuple struct** or **unit-like struct**.
-- Any enum value consumes as much memory as the largest variant for its corresponding enum type, as well as the size needed to store a discriminant.
-@ulend
-
-@[1-3](Declaring an enumerated type and its variants.)
-@[6-8](Enumeration variants can be constructed similarly to structs, using a path to an enum variant instead of to a struct.)
 
 ---
 
@@ -1171,21 +1353,24 @@ BitAnd, BitOr
 
 ---
 
-Move semantics
-Pattern matching
-Refutable bindings and Irrefutable bindings
+List of presentations
+=====================
 
-Parametric Types
-Enumerated types
-Lifetimes - static, stack, heap
-Safety
-Mono-morphisation
-Macro
-Closure
+* Attributes
+* Traits
+* Move semantics
+* Pattern matching
+* Refutable bindings and Irrefutable bindings
+* Parametric Types
+* Lifetimes - static, stack, heap
+* Safety
+* Mono-morphisation
+* Macro
 
-Crate, Modules, files and directories.
+---
 
 Attributes
+==========
 
 #[doc="..."]
 #![crate_name = "projx"] // Specify the crate name.
@@ -1198,15 +1383,22 @@ mod thread {
     mod local_data;
 }
 
-What are the limitations of user defined types ?
-Are there any special significance attached to main.rs ?
-Are there any special significance attached to lib.rs ?
-
 ---
 
-traits
+Presentation on traits
+======================
 
 Auto-traits :
 Core-traits :
 
 Termination
+
+---
+
+Questions
+=========
+
+What are the limitations of user defined types ?
+Are there any special significance attached to main.rs ?
+Are there any special significance attached to lib.rs ?
+
