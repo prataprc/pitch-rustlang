@@ -613,8 +613,94 @@ Point3d {y: 0, z: 10, .. base};
 
 ---
 
-Enumerated types
-================
+Enum
+====
+
+An Enumerated type, in its simplest form, is possible set of values
+that the enumerated-type can have.
+
+```rust
+enum PrimaryColors {
+	Red,
+	Green,
+	Blue,
+}
+```
+
+Here **PrimaryColors**, although internally it is represented as an integer,
+can only have one of the three values **Red**, **Green**, **Blue**.
+
++++
+
+Enum types
+==========
+
+```rust
+enum IpAddrKind {
+    V4(String),
+    V6(String),
+}
+```
+
+@snap[mt20 fragment]
+Rust's version of enumerated type not only implement the simplest
+form of enumerating values, but also provide a powerful way to
+combine related types as a variant of a more generic type.
+@snapend
+
+@snap[mt20 fragment]
+Here we see that IP-Address can be 4-byte variant, <b>v4</b>, defined by
+the old version-4 spec, or, 16-byte variant, <b>v6</b>, defined by the
+latest version-6 spec.
+@snapend
+
+@snap[mt20 fragment]
+Similar to struct, each enumerated variant follow the syntax of:
+@snapend
+
+@ul
+* Unit-like variant, with no fields.
+* Tuple like variant, with positional fields.
+* Struct like variant, with named fields.
+@ulend
+
+@snap[mt20 fragment]
+Any enum value consumes as much memory as the largest variant for its corresponding enum type, as well as the size needed to store a discriminant.
+@snapend
+
++++
+
+Enum: custom discriminant
+=========================
+
+```rust
+enum Foo {
+    Bar,            // 0
+    Baz = 123,      // 123
+    Quux,           // 124
+}
+
+let baz_discriminant = Foo::Baz as u32;
+assert_eq!(baz_discriminant, 123);
+
+#[repr(u8)]
+enum SmallSizedDiscriminant {
+    Zero,
+    One,
+}
+
+enum ZeroVariants {}
+```
+
+@[1-5](Each enum instance has a discriminant which is an integer associated to it that is used to determine which variant it holds.)
+@[7-8](These enumerations can be cast to integer types with the as operator by a numeric cast.)
+@[1-5](Under the default-representation, the specified discriminant is interepreted as an **isize**.)
+@[10-14](Discriminant size can be changed using the **repr** attribute.)
+
++++
+
+Enum: construction
+==================
 
 ```rust
 enum Message {
@@ -627,15 +713,6 @@ let q = Message::Quit;
 let w = Message::WriteString("Some string".to_string());
 let m = Message::Move { x: 50, y: 200 };
 ```
-
-@ul
-- An enumerated type is a nominal, heterogeneous disjoint union type, denoted by the name of an enum item.
-- An **enum item** declares both the type and a number of variants, each of which is independently named and each variant has the syntax of a **struct**, **tuple struct** or **unit-like struct**.
-- Any enum value consumes as much memory as the largest variant for its corresponding enum type, as well as the size needed to store a discriminant.
-@ulend
-
-@[1-3](Declaring an enumerated type and its variants.)
-@[6-8](Enumeration variants can be constructed similarly to structs, using a path to an enum variant instead of to a struct.)
 
 ---
 
