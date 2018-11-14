@@ -1478,4 +1478,5 @@ Questions
 What are the limitations of user defined types ?
 Are there any special significance attached to main.rs ?
 Are there any special significance attached to lib.rs ?
+what is "const fn" ?
 
