@@ -14,42 +14,43 @@ The next generation systems language <br/> <br/>
 
 ---
 
-Why Rust ?
-==========
+What we can do with Rust ?
+==========================
 
-<table>
+<table class="size-50">
 <tr><th> Doing what    </th> <th> Rust     </th> <th> C        </th> <th> Python   </th> <th> Java     </th> <th> Golang   </th> <th> C#       </th> <th> Swift    </th> <th> js       </th> </tr>
-<tr><td> Boot loader   </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
-<tr><td> Firmware      </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
-<tr><td> Kernel        </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
-<tr><td> Script        </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> </tr>
-<tr><td> Middleware    </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
-<tr><td> Algorithms    </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
-<tr><td> Database      </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> </tr>
-<tr><td> Web-stack     </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
-<tr><td> Browser       </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td> &#10004; </td> </tr>
-<tr><td> Windows       </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> </tr>
-<tr><td> OSX           </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
-<tr><td> Android / iOS </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> </tr>
+<tr class="fragment"><td> Boot loader   </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
+<tr class="fragment"><td> Firmware      </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
+<tr class="fragment"><td> Kernel        </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> </tr>
+<tr class="fragment"><td> Script        </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> </tr>
+<tr class="fragment"><td> Middleware    </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr class="fragment"><td> Algorithms    </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr class="fragment"><td> Database      </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> </tr>
+<tr class="fragment"><td> Web-stack     </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr class="fragment"><td> Browser <span style="color: gray;">\*</span> </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td>          </td> <td> &#10004; </td> </tr>
+<tr class="fragment"><td> Windows       </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> </tr>
+<tr class="fragment"><td> OSX           </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> </tr>
+<tr class="fragment"><td> Android / iOS <span style="color: gray;">\*</span> </td> <td> &#10004; </td> <td>          </td> <td>          </td> <td> &#10004; </td> <td> &#10004; </td> <td>          </td> <td> &#10004; </td> <td>          </td> </tr>
 </table>
 
-In case of Rust some of the capabilities are work in progress, but are very much possible.
+@snap[size-50 text-gray south fragment]
+<span style="color: gray;">\*</span> encouraging work in progress
+@snapend
 
 ---
 
 Rust and C
 ==========
 
-Rust happens to carry forward all the goodness of C and avoiding,
-as much as possible, its pitfalls, corner-cases and legacy issues.
-Unlike C++'s large collection of features that stick out, Rust maintains
-the C like philosophy through and through, to enable programmers with
-small, but powerful set of features that can inter-play with each
-other seamlessly.
+@snap[mt20 size-80 fragment]
+Rust maintains C like philosophy through and through, to enable
+programmers with small, but powerful set of features that can inter-play
+with each other seamlessly.
+@snapend
 
 <style> table th, table td { text-align: center !important; } </style>
 
-<table class="south-west">
+<table class="size-60 south-west">
   <tr class="fragment">
     <th style="color: blue;"> Feature </th> <th> C </th> <th> Rust </th>
   </tr>
@@ -79,7 +80,7 @@ other seamlessly.
   </tr>
 </table>
 
-<table class="south-east">
+<table class="size-60 south-east">
   <tr class="fragment">
     <th style="color: blue;"> Feature </th> <th> C </th> <th> Rust </th>
   </tr>
@@ -102,7 +103,7 @@ other seamlessly.
     <td> Build and packaging </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
   </tr>
   <tr class="fragment">
-    <td> Macro </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
+    <td> Macros </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
   </tr>
   <tr class="fragment">
     <td> Closures </td> <td class="text-red"> N </td> <td class="text-blue"> Y </td>
@@ -147,7 +148,7 @@ fn main() {
 }
 ```
 
-@[1](main function returns unit type **(\)**)
+@[1](main function returns unit type - **(\)**)
 @[2](o/p: hello world)
 
 +++
@@ -164,7 +165,7 @@ fn main() -> io::Result<()> {
 }
 ```
 
-@[1](main function returns **Result<(\),io::Error>**)
+@[1](main function returns - **Result<(\),io::Error>**)
 @[2](o/p: hello world)
 
 +++
@@ -182,8 +183,111 @@ fn main() {
 }
 ```
 
-@[1](indicates that this rust program to be executed as a script)
+@[1](Indicates that this rust program to be executed as a script)
 @[4](o/p: Hello world!)
+
+---
+
+@title[Value]
+
+@snap[midpoint text-center]
+<h1 style="text-align: center !important;">Values</h1>
+<br/>
+All of programming is operating on @color[blue](values). In Rust, every
+value has a single, specific @color[blue](type).
+<br/> <br/>
+When values of different types allow same @color[blue](operation),
+then such an operation can be abstracted as a @color[blue](trait)
+@snapend
+
++++
+
+Example
+=======
+
+<br/> <br/>
+
+```rust
+let x: i32 = 10 + 20;
+let y: f64 = 10.2 + 20.5;
+```
+
+@[1](addition can be applied on integers - **i32**.)
+@[2](addition can be applied on floating point - **f64**.)
+
+<br/> <br/> <br/>
+
+@snap[fragment]
+In Rust, addition operation, denoted by its shortcut symbol @color[blue](+),
+is abstracted as a trait - @color[blue](Add).
+@snapend
+
+---
+
+Value: Memory layout
+====================
+
+All values for a given type have a pre-defined and identical memory-layout,
+types memory layout can be controlled via compiler-attributes.
+
+In a rust program every value is either stored,
+* as part of the machine instruction.
+* or memory location, where memory can be stack or heap.
+
+Variable names, either local or static, points to a memory location
+in stack or heap.
+
+There is a special type of value that points to a memory location. The
+type of such values are called @color[blue](references) or @color[blue](pointers),
+denoted with symbols @color[blue](&) and @color[blue](*). Examples,
+* &int, &str, &String, &Vec
+* \*int, \*str, \*String, \*Vec
+
+And generically speaking - @color[blue](&T) and @color[blue](*T).
+
+---
+
+A Detour
+========
+
+Before expanding further into the language starting from values,
+let us take a small detour of,
+
+* Inventory of types.
+* Inventory of keywords.
+* Identifiers that can be used in a rust program.
+* Whitespace rules and meaning.
+* Comments within rust program.
+
+---
+
+Inventory of types
+==================
+
+Primitive types:
+
+@ul
+- **Boolean type**
+- **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
+- **Floating point - f32, f64**
+- **Machine dependant integer types - isize, usize**
+- **Textual types - char, str**
+- **Never type !**
+@ulend
+
+@snap[mt20 fragment]
+Complex types:
+@snapend
+
+@ul[mt20]
+- **Structural type**
+- **Tuple type**
+- **Array type**
+- **Slice type**
+- **Function pointer**
+- **Reference**
+- **Pointer**
+@ulend
 
 ---
 
@@ -281,18 +385,16 @@ Identifiers
 
 Similar to symbols in C, used to name items in a rust program. Like,
 
-@ul
-- Type-name, can be a tuple, struct, union, alias. Convention is to start with uppercase and use camel-case. <br/> @color[blue](Example: struct BigInt { ... })
-- Local variable-name. Convention is to start with smallcase and use `_` as word separator. <br/> @color[blue](Example: struct BigInt { int64 upper\_half, int64 lower\_half })
-- Constants and static name. Convention is to use all UPPERCASE and use `_` as word separator. <br/> @color[blue](Example: const LIMIT_START = 100\_i32)
-- Field-name within struct and union. Convetion is same as local variable-name
-- Variant-name within enumeration. Convention is same as Type-name.
-- Associated types. Convention is same as Type-name
-- Function-name. Convention is same as local variable name.
-- Trait-name. Convention is same as type-name.
-- Module-name. Convention is same as local variable name.
-- Crate-name. Convention is same as local variable name.
-@ulend
+- **Tuple**, **struct**, **union**, **type-alias**. Convention is to start with uppercase and use camel-case. <br/> @color[blue](Example: struct BigInt { ... })
+- **Local variable-name**. Convention is to start with smallcase and use `_` as word separator. <br/> @color[blue](Example: struct BigInt { int64 upper\_half, int64 lower\_half })
+- **Constants** and **static name**. Convention is to use all UPPERCASE and use `_` as word separator. <br/> @color[blue](Example: const LIMIT_START = 100\_i32)
+- **Field-name** within struct and union. Convetion is same as local variable-name
+- **Variant-name** within enumeration. Convention is same as Type-name.
+- **Function-name**. Convention is same as local variable name.
+- **Trait-name**. Convention is same as type-name.
+- **Associated types**. Convention is same as Type-name
+- **Module-name**. Convention is same as local variable name.
+- **Crate-name**. Convention is same as local variable name.
 
 ---
 
@@ -378,50 +480,10 @@ List of whitespace token allowed in a rust program
 
 ---
 
-@title[Value]
+Value: Literals
+================
 
-@snap[midpoint text-center]
-<h1 style="text-align: center !important;">Values</h1>
-<br/>
-All of programming is operating on values. In Rust, every value
-has a single, specific type but may implement several different traits,
-or be compatible with different type constaints.
-@snapend
-
----
-
-Inventory of types
-==================
-
-Primitive types:
-
-@ul
-- **Boolean type**
-- **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
-- **Floating point - f32, f64**
-- **Machine dependant integer types - isize, usize**
-- **Textual types - char, str**
-- **Never type !**
-@ulend
-
-@snap[mt20 fragment]
-Complex types:
-@snapend
-
-@ul[mt20]
-- **Structural type**
-- **Tuple type**
-- **Array type**
-- **Slice type**
-- **Function pointer**
-- **Reference**
-- **Pointer**
-@ulend
-
----
-
-Literals
-========
+Literals are values that can be hardcoded in a rust program.
 
 @ul
 - **Character** and **String** literals.
@@ -716,6 +778,150 @@ let m = Message::Move { x: 50, y: 200 };
 
 ---
 
+Union
+=====
+
+In many aspects unions behave exactly like structs. Except,
+
+* Layout
+  * The key property of unions is that all fields of a union share
+    common storage.
+  * Size of a union is determined by the size of its largest field.
+* Safety
+  * Active field in a union is not generally known statically,
+    so all reads and pattern matching of union fields have to be
+    placed in ``unsafe`` blocks.
+* Ownership
+  * If one field of a union is borrowed all its remaining fields are borrowed as well.
+
++++
+
+Union example
+=============
+
+```rust
+#[repr(C)]
+union MyUnion {
+    f1: u32,
+    f2: f32,
+}
+
+fn f(u: MyUnion) {
+    let u = MyUnion { f1: 1 };
+	unsafe {
+		let f = u.f1;
+	}
+    unsafe {
+        match u {
+            MyUnion { f1: 10 } => { println!("ten"); }
+            MyUnion { f2 } => { println!("{}", f2); }
+        }
+    }
+	u.f1 = 2;
+}
+
+```
+
+@[2-5](Defining a union type.)
+@[8](The expression creates a value of type MyUnion with active field f1.)
+@[9-11](Reads are unsafe.)
+@[12-17](Pattern matching is allowed, as a read operation, which again is unsafe.)
+@[18](Writes to Copy union fields do not require reads for running destructors, so these writes don't have to be placed in unsafe blocks.)
+
+---
+
+Functions
+=========
+
+```rust
+fn answer_to_life_the_universe_and_everything() -> i32 {
+    return 42;
+}
+fn first((value, _): (i32, i32)) -> i32 {
+    value
+}
+```
+
+@ul[mt20]
+- Function's arguments are **irrefutable patterns**, similar to **let** bindings.
+- A function is conceptually wrapped in a block that binds the argument patterns and then returns the value of the function's block.
+- Tail expression of the a block, if evaluated, implicitly becomes the return value from the block.
+- An explicit return expression can be used, anywhere in the block, to short-circuit the implied tail-return.
+@ulend
+
++++
+
+Generic functions
+=================
+
+```rust
+fn foo<A, B>(x: A, y: B) {
+}
+
+// Trait bounds, using where syntax
+fn bar<T>(x: T) where T: Debug -> bool {
+	if mem::size_of::<T>() == 4 { return true }
+	return false
+}
+```
+
+@ul[mt20]
+- Function `foo` is parametrised over types `A` and `B`.
+- Inside the function signature and body, the name of the type parameter can be used as type-name.
+- Trait bounds can be specified for the type-parameters to allow methods from that trait to be called on the values.
+@[6](It is necessary, if there is not sufficient context to determine the type parameters, to supply the type parameters explicitly in a trailing path component after the function name.)
+@ulend
+
++++
+
+Extern functions (FFI)
+======================
+
+```rust
+extern fn new_i32() -> i32 { 0 }
+extern "stdcall" fn new_i32_stdcall() -> i32 { 0 }
+```
+
+@ul[mt20]
+- Provide the opposite functionality to external blocks which allow Rust code to call foreign code.
+- Also called as extern functions, can be called by foreign code.
+@ulend
+
+@[1](Declares an extern fn, the ABI defaults to "C".)
+@[2](Declares an extern fn with "stdcall" ABI.)
+
++++
+
+Function attributes
+===================
+
+```rust
+#[test] // Outer attributes are allowed on functions.
+fn test_function() {
+}
+fn test_another_function() {
+	!#[test] // Inner attributes are allowed immediately after the function signature.
+}
+```
+
+Attributes that are allowed on functions:
+
+@ul
+* cfg
+* deprecated
+* doc
+* export_name
+* link_section
+* no_mangle
+* allow, deny, forbid, warn
+* must_use
+* procedural macros
+* test
+* cold, inline
+@ulend
+
+---
+
 Crates and Modules
 ==================
 
@@ -953,95 +1159,72 @@ mod foo {
 
 ---
 
-Functions
-=========
+Constant Items
+==============
+
+* Named constant value, not associated with a specific memory location in the program.
+* When the name goes out of scope, its destructors are run.
+* Inlined wherever they are used.
+* Constants must be explicitly typed
+* The type, and references, must have a __'static__ lifetime.
+* Constants may refer to the address of other constants
+
++++
+
+Constant: Examples
+==================
 
 ```rust
-fn answer_to_life_the_universe_and_everything() -> i32 {
-    return 42;
+const BIT1: u32 = 1 << 0;
+const BIT2: u32 = 1 << 1;
+
+const BITS: [u32; 2] = [BIT1, BIT2];
+const STRING: &'static str = "bitstring";
+
+struct BitsNStrings<'a> {
+    mybits: [u32; 2],
+    mystring: &'a str,
 }
-fn first((value, _): (i32, i32)) -> i32 {
-    value
+
+const BITS_N_STRINGS: BitsNStrings<'static> = BitsNStrings {
+    mybits: BITS,
+    mystring: STRING,
+};
+```
+
+@[1](named constant values.)
+@[2](constants must be explicitly typed.)
+@[4](inlined wherever they are used.)
+@[5](the type, and references, must have a __'static__ lifetime.)
+@[7-15](constants may refer to the address of other constants.)
+
++++
+
+Constants with Destructors
+==========================
+
+In Rust destructors are implemented using the **Drop** trait. Constants
+can contain destructors. Destructors are run when the value goes out of
+scope.
+
+```rust
+struct TypeWithDestructor(i32);
+impl Drop for TypeWithDestructor {
+    fn drop(&mut self) {
+        println!("Dropped. Held {}.", self.0);
+    }
+}
+
+const ZERO_WITH_DESTRUCTOR: TypeWithDestructor = TypeWithDestructor(0);
+
+fn create_and_drop_zero_with_destructor() {
+    let x = ZERO_WITH_DESTRUCTOR;
 }
 ```
 
-@ul[mt20]
-- Function's arguments are **irrefutable patterns**, similar to **let** bindings.
-- A function is conceptually wrapped in a block that binds the argument patterns and then returns the value of the function's block.
-- Tail expression of the a block, if evaluated, implicitly becomes the return value from the block.
-- An explicit return expression can be used, anywhere in the block, to short-circuit the implied tail-return.
-@ulend
-
----
-
-Generic functions
-=================
-
-```rust
-fn foo<A, B>(x: A, y: B) {
-}
-
-// Trait bounds, using where syntax
-fn bar<T>(x: T) where T: Debug -> bool {
-	if mem::size_of::<T>() == 4 { return true }
-	return false
-}
-```
-
-@ul[mt20]
-- Function `foo` is parametrised over types `A` and `B`.
-- Inside the function signature and body, the name of the type parameter can be used as type-name.
-- Trait bounds can be specified for the type-parameters to allow methods from that trait to be called on the values.
-@[6](It is necessary, if there is not sufficient context to determine the type parameters, to supply the type parameters explicitly in a trailing path component after the function name.)
-@ulend
-
----
-
-Extern functions (FFI)
-======================
-
-```rust
-extern fn new_i32() -> i32 { 0 }
-extern "stdcall" fn new_i32_stdcall() -> i32 { 0 }
-```
-
-@ul[mt20]
-- Provide the opposite functionality to external blocks which allow Rust code to call foreign code.
-- Also called as extern functions, can be called by foreign code.
-@ulend
-
-@[1](Declares an extern fn, the ABI defaults to "C".)
-@[2](Declares an extern fn with "stdcall" ABI.)
-
----
-
-Function attributes
-===================
-
-```rust
-#[test] // Outer attributes are allowed on functions.
-fn test_function() {
-}
-fn test_another_function() {
-	!#[test] // Inner attributes are allowed immediately after the function signature.
-}
-```
-
-Attributes that are allowed on functions:
-
-@ul
-* cfg
-* deprecated
-* doc
-* export_name
-* link_section
-* no_mangle
-* allow, deny, forbid, warn
-* must_use
-* procedural macros
-* test
-* cold, inline
-@ulend
+@[1-6](TypeWithDestructor implementing a destructor.)
+@[8](declaring a constant for TypeWithDestructor.)
+@[13](**x** gets dropped at end of function, calling drop. prints "Dropped. Held 0.".)
 
 ---
 
