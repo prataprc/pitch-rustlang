@@ -128,7 +128,7 @@ Introduction
 @ulend
 
 @ul[para]
-- An @color[blue](item) is a component of a crate that are organised withing the crate by a nested set of modules.
+- An @color[blue](item) is a component of a crate that are organised within the crate by a @color[blue](nested set of modules).
 @ulend
 
 @ul[para]
@@ -188,106 +188,21 @@ fn main() {
 
 ---
 
-@title[Value]
+Syntax and Tokens
+=================
 
-@snap[midpoint text-center]
-<h1 style="text-align: center !important;">Values</h1>
-<br/>
-All of programming is operating on @color[blue](values). In Rust, every
-value has a single, specific @color[blue](type).
-<br/> <br/>
-When values of different types allow same @color[blue](operation),
-then such an operation can be abstracted as a @color[blue](trait)
-@snapend
+Before expanding further into the language concepts and features
+let us go through its syntax and tokens.
 
-+++
-
-Example
-=======
-
-<br/> <br/>
-
-```rust
-let x: i32 = 10 + 20;
-let y: f64 = 10.2 + 20.5;
-```
-
-@[1](addition can be applied on integers - **i32**.)
-@[2](addition can be applied on floating point - **f64**.)
-
-<br/> <br/> <br/>
-
-@snap[fragment]
-In Rust, addition operation, denoted by its shortcut symbol @color[blue](+),
-is abstracted as a trait - @color[blue](Add).
-@snapend
-
----
-
-Value: Memory layout
-====================
-
-All values for a given type have a pre-defined and identical memory-layout,
-types memory layout can be controlled via compiler-attributes.
-
-In a rust program every value is either stored,
-* as part of the machine instruction.
-* or memory location, where memory can be stack or heap.
-
-Variable names, either local or static, points to a memory location
-in stack or heap.
-
-There is a special type of value that points to a memory location. The
-type of such values are called @color[blue](references) or @color[blue](pointers),
-denoted with symbols @color[blue](&) and @color[blue](*). Examples,
-* &int, &str, &String, &Vec
-* \*int, \*str, \*String, \*Vec
-
-And generically speaking - @color[blue](&T) and @color[blue](*T).
-
----
-
-A Detour
-========
-
-Before expanding further into the language starting from values,
-let us take a small detour of,
-
-* Inventory of types.
 * Inventory of keywords.
-* Identifiers that can be used in a rust program.
+* Identifiers.
 * Whitespace rules and meaning.
 * Comments within rust program.
-
----
-
-Inventory of types
-==================
-
-Primitive types:
-
-@ul
-- **Boolean type**
-- **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
-- **Floating point - f32, f64**
-- **Machine dependant integer types - isize, usize**
-- **Textual types - char, str**
-- **Never type !**
-@ulend
-
-@snap[mt20 fragment]
-Complex types:
-@snapend
-
-@ul[mt20]
-- **Structural type**
-- **Tuple type**
-- **Array type**
-- **Slice type**
-- **Function pointer**
-- **Reference**
-- **Pointer**
-@ulend
+* Literals - char, strings, bool, number.
+* Lifetimes and loop labels.
+* Punctuations.
+* Delimiters.
+* Inventory of types.
 
 ---
 
@@ -298,7 +213,7 @@ Rust keywords are identifier tokens that have special meaning. Keywords can
 generally be classified between:
 
 @ul
-* **control flow** - @color[gray](break continue if else fn return loop for while match)
+* **control flow** - @color[gray](if else loop for while match break continue fn return)
 * **data** - @color[gray](false true box const let mut move ref self static)
 * **type** - @color[gray](enum Self type struct trait unsafe where union impl)
 * **compiler** - @color[gray](crate extern mod pub super self use)
@@ -385,18 +300,20 @@ Identifiers
 
 Similar to symbols in C, used to name items in a rust program. Like,
 
-- **Tuple**, **struct**, **union**, **type-alias**. Convention is to start with uppercase and use camel-case. <br/> @color[blue](Example: struct BigInt { ... })
-- **Local variable-name**. Convention is to start with smallcase and use `_` as word separator. <br/> @color[blue](Example: struct BigInt { int64 upper\_half, int64 lower\_half })
-- **Constants** and **static name**. Convention is to use all UPPERCASE and use `_` as word separator. <br/> @color[blue](Example: const LIMIT_START = 100\_i32)
-- **Field-name** within struct and union. Convetion is same as local variable-name
-- **Variant-name** within enumeration. Convention is same as Type-name.
-- **Function-name**. Convention is same as local variable name.
-- **Trait-name**. Convention is same as type-name.
-- **Associated types**. Convention is same as Type-name
-- **Module-name**. Convention is same as local variable name.
-- **Crate-name**. Convention is same as local variable name.
+- **Tuple**, **struct**, **union**, **type-alias**. Start with uppercase and use camel-case. @color[blue](struct BigInt { ... })
+- **Local variable-name**. Start with smallcase and use `_` as word separator. <br/> @color[blue](struct BigInt { int64 upper\_half, int64 lower\_half })
+- **Constants** and **static name**. Use all UPPERCASE and use `_` as word separator. <br/> @color[blue](const LIMIT_START = 100\_i32)
+- **Type parameter**. Use single uppercase alphabet. @color[blue](T, D)
+- **Lifetime**. Use single lowercase alphabet, 'static and '_ are reserved lifetime. @color[blue]('a, 'b)
+- **Field-name** within struct and union. Same as local variable-name
+- **Variant-name** within enumeration. Same as Type-name.
+- **Function-name**. Same as local variable name.
+- **Trait-name**. Same as type-name.
+- **Associated types**. Same as Type-name
+- **Module-name**. Same as local variable name.
+- **Crate-name**. Same as local variable name.
 
----
++++
 
 Identifier rules
 ================
@@ -480,13 +397,22 @@ List of whitespace token allowed in a rust program
 
 ---
 
-Value: Literals
-================
+Literals
+========
 
 Literals are values that can be hardcoded in a rust program.
 
 @ul
-- **Character** and **String** literals.
+- **Character** literals.
+- **String** literals.
+- **Raw string** literals.
+- **Byte** literals.
+- **Byte string** literals.
+- **Raw byte string** literals.
+- **Integer** literals.
+- **Float** literals.
+- **Boolean** literals.
+@ulend
 
 ---
 
@@ -497,7 +423,7 @@ Literals: Character and Strings
 |---------------   |------------|---------------|-----------------------
 | Character		   | 'H'		| All Unicode	| Quote & ASCII & Unicode
 | String		   | "hello"	| All Unicode	| Quote & ASCII & Unicode
-| Raw			   | r#"hello"#	| All Unicode	| N/A
+| Raw String       | r#"hello"#	| All Unicode	| N/A
 | Byte			   | b'H'		| All ASCII		| Quote & Byte
 | Byte string	   | b"hello"	| All ASCII		| Quote & Byte
 | Raw byte string  | br#"hello"#| All ASCII		| N/A
@@ -540,8 +466,77 @@ as boolean-true and boolean-false respectively.
 
 ---
 
-Literals: Lifetimes and loop-labels
-===================================
+Lifetimes and loop-labels
+=========================
+
+---
+
+Punctuations
+============
+
+---
+
+Delimiters
+==========
+
+---
+
+@title[Value]
+
+@snap[midpoint text-center]
+<h1 style="text-align: center !important;">Values</h1>
+<br/>
+All of programming is operating on @color[blue](values). In Rust, every
+value has a single, specific @color[blue](type).
+<br/> <br/>
+When values of different types allow same @color[blue](operation),
+then such an operation can be abstracted as a @color[blue](trait)
+@snapend
+
++++
+
+Memory layout
+=============
+
+All values for a given type have a pre-defined and identical memory-layout
+that can be controlled via compiler-attributes.
+
+In a rust program every value is either stored,
+* as part of the machine instruction.
+* or memory location, where memory can be stack or heap.
+
+Variable names, either local or static, points to a memory location
+in stack or heap.
+
+There is a special type of value that points to a memory location. The
+type of such values are called @color[blue](references) or @color[blue](pointers),
+denoted with symbols @color[blue](&) and @color[blue](*). Examples,
+* &int, &str, &String, &Vec
+* \*int, \*str, \*String, \*Vec
+
+And generically speaking - @color[blue](&T) and @color[blue](*T).
+
++++
+
+Example
+=======
+
+<br/> <br/>
+
+```rust
+let x: i32 = 10 + 20;
+let y: f64 = 10.2 + 20.5;
+```
+
+@[1](addition can be applied on integers - **i32**.)
+@[2](addition can be applied on floating point - **f64**.)
+
+<br/> <br/>
+
+@snap[fragment]
+In Rust, addition operation, denoted by its shortcut symbol @color[blue](+),
+is abstracted as a trait - @color[blue](Add).
+@snapend
 
 ---
 
@@ -550,9 +545,42 @@ Literals: Lifetimes and loop-labels
 @snap[midpoint text-center]
 <h1 style="text-align: center !important;">Types</h1>
 <br/>
-Every variable, item and value in Rust has a type. The type of a value defines
-the interpretation of the memory holding it.
+Every variable, item and value in Rust has a type. The type of a value
+defines the interpretation of the memory holding it.
+<br/>
+In other words, a value can be treated as an instance of its type.
 @snapend
+
+---
+
+Inventory of types
+==================
+
+Primitive types:
+
+@ul
+- **Boolean type**
+- **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
+- **Floating point - f32, f64**
+- **Machine dependant integer types - isize, usize**
+- **Textual types - char, str**
+- **Never type !**
+- **Unit type ()**
+@ulend
+
+@snap[mt20 fragment]
+Complex types:
+@snapend
+
+@ul[mt20]
+- **Structural type**
+- **Tuple type**
+- **Array type**
+- **Slice type**
+- **Function pointer**
+- **Reference**
+- **Pointer**
+@ulend
 
 ---
 
@@ -569,6 +597,10 @@ standard library, these are called primitive types.
 - **Machine dependant integer types** with same number of bits as platform’s pointer type, used for indexing and pointer offset @color[blue](usize, isize).
 - **Textual types** @color[blue](char, str). Char is [unicode scalar value](http://www.unicode.org/glossary/#unicode_scalar_value) and @color[blue]([char]) is effectively an UCS4/UTF-32 array. Str is dynamically sized type that represents [utf8](https://en.wikipedia.org/wiki/UTF-8) encode string.
 - **Never type !**, expressions of type ! can be coerced into any other type.
+- **Unit type ()**, a tuple type with no element, equivalent of None.
+  - Zero sized.
+  - Alignment is 1.
+  - All statements, when treated as expression, return a value of unit-type.
 @ulend
 
 ---
@@ -874,7 +906,7 @@ fn bar<T>(x: T) where T: Debug -> bool {
 
 +++
 
-Extern functions (FFI)
+Extern functions
 ======================
 
 ```rust
@@ -922,6 +954,683 @@ Attributes that are allowed on functions:
 
 ---
 
+@title[Traits]
+
+@snap[midpoint text-center]
+<h1 style="text-align: center !important;">Traits</h1>
+<br/>
+A Trait can be called as @color[blue](behaviour of values).
+<br/>
+Typically when a behaviour is common between two or more types, it becomes
+a good candidate to be abstracted as a trait.
+<br/> <br/>
+In other words, a Trait can be used to enrich one or more types.
+@snapend
+
+---
+
+Trait: Items
+============
+
+A trait can have following associated items:
+
+* Functions
+* Types
+* Constants
+
+Traits are implemented for specific types through separate
+implementations. Typically Traits are
+defined first, and types implement them by bring them into scope,
+either in the same crate or in a different crate.
+
+* A trait definition can refer to the implementing type, without knowing
+  the type-name, using the Self keyword.
+* Items associated with a trait can have a default definition. In which
+  case, types can choose to skip or override the item definition.
+* Traits can be added as bounds (aka where clause contraints) on
+  type-parameters.
+* Traits, can also be parametrised over types and lifetimes.
+
+---
+
+Trait: Object and safety
+========================
+
+A trait object is an opaque value of another type that implements
+a set of traits. The set of traits is made up of an object safe
+base trait plus any number of auto traits.
+
+For a trait to be object-safe:
+
+* It must not have any associated constants.
+* It must not require Self: Sized
+* All associated functions must either have a where Self: Sized bound, or
+  * Not have any type parameters (although lifetime parameters are allowed), and
+  * Be a method that does not use Self except in the type of the receiver.
+* All supertraits must also be object safe.
+
+---
+
+Trait: Super traits
+===================
+
+Super traits can be used to create a dependency chain of traits. That is,
+to implement a specific trait, types must also implement the trait's super
+traits. It also means that all associated items of super-traits are
+implicitly available as part of the trait.
+
+It is an error for a trait to be its own supertrait.
+
+```rust
+trait Shape { fn area(&self) -> f64; }
+trait Square : Shape { fn side(&self) -> f64; }
+trait Circle where Self: Shape {
+    fn radius(&self) -> f64 {
+        // A = pi * r^2, so algebraically, r = sqrt(A / pi)
+        (self.area() /std::f64::consts::PI).sqrt()
+    }
+}
+
+let circle = Box::new(circle) as Box<dyn Circle>;
+```
+
+@[1](Shape is the super trait.)
+@[2](Square is the sub trait of Shape, and area-method is available on types implementing Square.)
+@[3](Circle is sub-trait of Shape defined used where clause, an alternate syntax.)
+@[4-7](Default definition for radius, implementing type can choose to skip radius, or override it.)
+@[9](Making a trait-object.)
+
+---
+
+@title[Implementation]
+
+@snap[midpoint text-center]
+<h1 style="text-align: center !important;">Implementations</h1>
+
+<br/>
+
+Types can be enriched by associating other items, like **constants**,
+**functions**, **types**, using an @color[blue](implementation) block.
+
+<br/> <br/>
+
+Types can also be enriched by implementing traits.
+@snapend
+
+---
+
+Inherent implementation
+=======================
+
+```rust
+struct Point {x: i32, y: i32}
+
+impl Point {
+    fn log(&self) {
+        println!("Point is at ({}, {})", self.x, self.y);
+    }
+}
+
+let my_point = Point {x: 10, y:11};
+my_point.log();
+```
+
+@ul[mt20]
+* Associate items to the implementing type.
+* Path of the associated item is the path to the implementing type followed by item's path component.
+* No type aliases.
+* An implementing type must be defined within the same crate as the original type definition
+@ulend
+
+---
+
+Trait implementation
+====================
+
+* A trait implementation must define all non-default associated items
+  declared by the trait.
+* Can override default associated items defined by the trait.
+* Cannot define any other items.
+* Path of associated item is TODO **<path::to::type as associated::item>**.
+
+Type parameters declared for an implementation must be used at least
+once in either the trait or the implementing type of an implementation.
+
+```rust
+struct Circle {
+    radius: f64,
+    center: Point,
+}
+
+impl Copy for Circle {}
+
+impl Clone for Circle {
+    fn clone(&self) -> Circle { *self }
+}
+
+impl Shape for Circle {
+    fn draw(&self, s: Surface) { do_draw_circle(s, *self); }
+    fn bounding_box(&self) -> BoundingBox {
+        let r = self.radius;
+        BoundingBox{x: self.center.x - r, y: self.center.y - r, width: 2.0 * r, height: 2.0 * r}
+    }
+}
+```
+
++++
+
+Trait coherence
+===============
+
+A trait implementation is considered incoherent, if:
+
+* either, the orphan check fails.
+* or, there are overlapping implementation instances.
+
+TODO: What is overlapping trait-implementation.
+
+Orphan check must satisfy either of the following conditions:
+
+* The trait being implemented is defined in the same crate.
+* At least one of either Self or a generic type parameter of the
+  trait must meet the following grammar, where C is a nominal
+  type defined within the containing crate:
+
+```bnf
+ T = C
+   | &C
+   | &mut C
+   | Box<C>
+```
+
+---
+
+Associated items
+================
+
+Associated Items are the items declared/defined in @color[blue](traits)
+or defined in @color[blue](implementations). Defined on a type.
+Logically related to the type. Enrich the behaviour of the type.
+
+Associated items can be:
+* Associated functions.
+* Associated methods.
+* Associated constants.
+* Associated types.
+
+They come in two varities:
+
+* @color[blue](Definitions) that contain the actual implementation.
+* @color[blue](Declarations) that declare signatures for definitions.
+
+Unless otherwise specified, both variants can be present in a trait
+or implementation.
+
++++
+
+Associated functions
+====================
+
+```rust
+struct Struct {
+    field: i32
+}
+impl Struct {
+    fn new() -> Struct {
+        Struct {
+            field: 0i32
+        }
+    }
+}
+
+trait Num {
+    fn from_i32(n: i32) -> Self;
+}
+impl Num for f64 {
+    fn from_i32(n: i32) -> f64 { n as f64 }
+}
+
+fn main () {
+    let _struct = Struct::new();
+	let _f: f64 = <f64 as Num>::from_i32(42);
+}
+```
+
+* Declaration of associated function is written as a function item,
+  except the function body is replaced with a @color[blue](**;**).
+* Definition of associated function is written the same as a function item.
+
+@[5-9](Associated function definition implemented on a type.)
+@[16](Associated function definition implemented on a trait.)
+@[21](Associated function on a triat can be invoked using trait-path.)
+
++++
+
+Associated method
+=================
+
+```rust
+trait Shape {
+    fn draw(&self, Surface);
+    fn bounding_box(&self) -> BoundingBox;
+}
+struct Circle {
+    // ...
+}
+impl Shape for Circle {
+    // ...
+}
+
+let circle_shape = Circle::new();
+let bounding_box = circle_shape.bounding_box();
+```
+
+Associated functions whose first parameter is named **self** are called
+methods.
+
+@[1-4](All values that have implementations of this trait while the trait is in scope can have their draw and bounding_box methods called.)
+@[13](Methods are invoked using method call operator.)
+
++++
+
+Associated method: self
+=======================
+
+The **self** parameter come in following variants and an equivalent shortcut:
+
+type                | shortcut
+--------------------|-----------
+self                | self: Self
+&'lifetime self     | self: &'lifetime Self
+&'lifetime mut self | self: &'lifetime mut Self
+self : Box &#60;Self&#62;    | (no shorthand)
+
+Lifetimes can be and usually are elided with this shorthand.
+
++++
+
+Associated types
+================
+
+* Associated types cannot be defined in inherent implementations.
+* Nor can they be given a default implementation in traits (unstable).
+* Declaration of associated type @color[blue]({type-keyword, identifier, optional list of trait bounds}).
+* Definition of associated type @color[blue]({type-keyword, identifier, =, type-name}.)
+
+```rust
+trait AssociatedType {
+    type AssocDecl : Copy;
+}
+
+struct Struct;
+#[derive(Copy)]
+struct OtherStruct;
+
+impl AssociatedType for Struct {
+    type Assoc = OtherStruct;
+}
+impl OtherStruct {
+    fn new() -> OtherStruct {
+        OtherStruct
+    }
+}
+fn main() {
+    let _other_struct: OtherStruct = <Struct as AssociatedType>::Assoc::new();
+}
+```
+
+@[2](Associated type declaration.)
+@[6](The optional trait bounds must be fulfilled by the implementations of the type alias.)
+@[10](Associated type definition.)
+@[18](Refering to associated type.)
+
++++
+
+Associated items trait impl
+===========================
+
+```rust
+trait Container {
+    type E;
+    fn empty() -> Self;
+    fn insert(&mut self, Self::E);
+}
+```
+
+In order for a type to implement this trait, it must not only
+provide implementations for every method, but it must specify
+the type E.
+
+Here's an implementation of Container for the standard library type Vec:
+
+```rust
+impl<T> Container for Vec<T> {
+    type E = T;
+    fn empty() -> Vec<T> { Vec::new() }
+    fn insert(&mut self, x: T) { self.push(x); }
+}
+```
+
+@[4](Associated types can be refered within a trait block as a type parameter.)
+
++++
+
+Associated constants
+====================
+
+```rust
+trait ConstantId {
+    const ID: i32;
+    const ID_F: f64 = 1.0;
+}
+
+struct Struct;
+
+impl ConstantId for Struct {
+    const ID: i32 = 1;
+}
+
+fn main() {
+    assert_eq!(1, Struct::ID);
+}
+```
+
+* Declaration of associated constant declares a signature for
+  associated constant definitions. It is written as
+  {const, identifier, :, type-name, ;}
+* Definition of associated constant defines a constant associated
+  with a type. It is written the same as a constant item.
+
+@[1](Associated constant declaration.)
+@[2](Associated constant declaration, with default value.)
+@[9](Associated constant definition.)
+
++++
+
+Items in a block
+================
+
+```rust
+fn scoping_fn() {
+    const X: u32 = 10;
+    static Y: u32 = 20;
+    extern crate std;
+    use std::i16::MAX;
+
+    mod level1 {
+        pub const Z: u32 = 30;
+    }
+
+    #[derive(Debug)] struct T { a: u32 };
+    trait TT { fn as_float(&self) -> f64; }
+    impl T {
+        fn new(a: u32) -> T { T{a} }
+    }
+    impl TT for T {
+        fn as_float(&self) -> f64 { f64::from(self.a) }
+    }
+
+    fn local_fn() -> bool { true }
+    let t = T::new(200);
+    println!("{} {} {}", X, Y, MAX);
+    println!("{} {:?} {:e} {}", level1::Z, t, t.as_float(), local_fn());
+}
+```
+
+All the above items are allowed either in a function or a block, and
+they are restricted to the function or block in which they are defined.
+
+@[2](Constant declaration.)
+@[3](Static declaration.)
+@[4](External crate declaration.)
+@[5](Use declaration.)
+@[7-9](Module declaration.)
+@[11](Struct type declaration, similarly type alias, union and enumeration are allowed.)
+@[12](Trait definition.)
+@[13-15](Inherent implementation.)
+@[16-18](Trait implementation.)
+@[20](Function item.)
+
+---
+
+Statements
+==========
+
+A statement is a component of a block, which in turn is a component of
+outer expression or function.
+
+Two kinds of statements:
+
+* Declaration statements
+* Expression statements
+
+---
+
+Declaration statements
+======================
+
+Two kinds of declaration statements
+
+* Item declaration, that includes all types of item declaration.
+  * Items are not given any canonical path, which means restricted
+    local scope.
+  * Except, associated items.
+* Let declaration, introduce a new set of variables into local scope.
+
+```rust
+fn outer() {
+  let outer_var = true;
+
+  fn inner() { /* outer_var is not in scope here */ }
+
+  inner();
+}
+```
+
+@[4](There is no implicit capture of the containing function's generic parameters, parameters, and local variables.)
+
+---
+
+Expression statements
+=====================
+
+An expression statement is one that evaluates an expression and
+ignores its result. All expression statement are supposed to end with a
+semi-colon and the end result is unit-type ().
+
+---
+
+Expressions
+===========
+
+Rust is primarily an expression language.
+Most forms of value-producing or effect-causing evaluation
+are directed by the unifor syntax category of expressions.
+
+Expression evaluation is determined by precedence and
+associativity rules.
+
+---
+
+Kinds of expressions
+====================
+
+Literal expressions.
+PathExpression
+
+OperatorExpression
+GroupedExpression
+ArrayExpression
+IndexExpression
+TupleExpression
+TupleIndexingExpression
+StructExpression
+EnumerationVariantExpression
+CallExpression
+MethodCallExpression
+FieldExpression
+
+ClosureExpression
+
+BlockExpression
+LoopExpression
+ContinueExpression
+BreakExpression
+RangeExpression
+IfExpression
+IfLetExpression
+MatchExpression
+ReturnExpression
+
+---
+
+Type Parametrisation
+=====================
+
+In Rust, @color[blue](types) and @color[blue](logic) can be parametrised
+over other types. More specifically,
+
+* Type aliases
+* Struct
+* Union
+* Enumeration
+* Functions
+* Traits
+* Implementations
+
+References, raw pointers, arrays, slices, tuples and function pointers
+have lifetime or type parameters as well, but are not referred to with
+path syntax.
+
++++
+
+Type params: Attributes
+=======================
+
+Generic lifetime and type parameters allow attributes on them.
+
+```rust
+// Assume that the derive for MyFlexibleClone declared `my_flexible_clone` as
+// an attribute it understands.
+#[derive(MyFlexibleClone)] struct Foo<#[my_flexible_clone(unbounded)] H> {
+    a: *const H
+}
+```
+
+---
+
+Trait and lifetime bounds
+=========================
+
+Type parameters can be constrained using trait bounds and lifetime bounds,
+using the **where clause**.
+
+Bounds that don't use the item's parameters or higher-ranked lifetimes
+are checked when the item is defined. It is an error for such a bound to
+be false.
+
+It is an error to have **Copy** or **Clone** as a bound on,
+
+* A mutable reference
+* trait object
+* slice
+
+It is an error to have **Sized** as a bound on,
+
+* a trait object
+* slice.
+
+
+
+
+---
+
+Higher ranked trait bounds
+==========================
+
+Type bounds may be higher ranked over lifetimes. These bounds specify
+a bound is true for all lifetimes.
+
+```rust
+fn call_on_ref_zero<F>(f: F) where F: Fn(&'a i32) {
+    let zero = 0;
+    f(&zero);
+}
+```
+
+Will throw following compiler error:
+
+```text
+error[E0261]: use of undeclared lifetime name `'a`
+ --> hklt.rs:1:44
+  |
+1 | fn call_on_ref_zero_<F>(f: F) where F: Fn(&'a i32) {
+  |                                            ^^ undeclared lifetime
+```
+
+To mitigate this error, we must associate ``'a`` lifetime to one
+of the input parameters.
+
++++
+
+Parametrise over lifetime
+=========================
+
+```rust
+fn call_on_ref_zero<'a, F>(f: F) where F: Fn(&'a i32) {
+    let zero = 0;
+    f(&zero);
+}
+```
+
+Will throw following compiler error:
+
+```text
+error[E0597]: `zero` does not live long enough
+ --> hklt.rs:3:8
+  |
+3 |     f(&zero);
+  |        ^^^^ borrowed value does not live long enough
+4 | }
+  | - borrowed value only lives until here
+  |
+  note: borrowed value must be valid for the lifetime 'a as defined on the function body at 1:23...
+ --> hklt.rs:1:23
+  |
+1 | fn call_on_ref_zero__<'a, F>(f: F) where F: Fn(&'a i32) {
+  |                       ^^
+```
+
+Only a higher-ranked bound can be used here as the lifetime of the
+reference is shorter than a lifetime parameter on the function
+
++++
+
+Higher ranked lifetimes
+=======================
+
+By using the special ``for`` syntax on the where clause we can define
+higher ranked lifetimes for the trait bounds.
+
+```rust
+fn call_on_ref_zero<F>(f: F) where for<'a> F: Fn(&'a i32) {
+    let zero = 0;
+    f(&zero);
+}
+```
+
+Alternative we can specify the higher-ranked lifetime just before the trait,
+the difference being that the lifetime's scope is restricted to the trait.
+
+```rust
+fn call_on_ref_zero<F>(f: F) where F: for<'a> Fn(&'a i32) {
+    let zero = 0;
+    f(&zero);
+}
+```
+
+---
+
 Crates and Modules
 ==================
 
@@ -964,6 +1673,15 @@ Inventory of Items
 ==================
 
 <table class="items-left">
+<tr><td class="text-gray"> constant items </tr></td>
+<tr><td class="text-gray"> static items </tr></td>
+<tr><td class="text-blue"> module </tr></td>
+<tr><td class="text-blue"> extern crate declaration  </tr></td>
+<tr><td class="text-blue"> use declarations </tr></td>
+<tr><td class="text-blue"> extern blocks </tr></td>
+</table>
+
+<table class="items-right">
 <tr><td class="text-brown"> type definitions </tr></td>
 <tr><td class="text-brown"> struct definitions </tr></td>
 <tr><td class="text-brown"> enumeration definitions </tr></td>
@@ -973,14 +1691,14 @@ Inventory of Items
 <tr><td class="text-green"> implementations  </tr></td>
 </table>
 
-<table class="items-right">
-<tr><td class="text-blue"> module </tr></td>
-<tr><td class="text-blue"> extern crate declaration  </tr></td>
-<tr><td class="text-blue"> use declarations </tr></td>
-<tr><td class="text-blue"> extern blocks </tr></td>
-<tr><td class="text-gray"> constant items </tr></td>
-<tr><td class="text-gray"> static items </tr></td>
-</table>
+<br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+
+@ul
+* @color[blue](Module) is used to create a namespace for related set of items. They are also used to organise rust program into files and directories.
+* @color[blue](Functions) can contain any other item, but they are scoped within the function. Items defined inside the function is not publicly visible to other items.
+* @color[blue](Trait) and @color[blue](Implementations) can associate type, constants and functions to enrich a type.
+@snapend
+
 
 ---
 
@@ -1225,6 +1943,48 @@ fn create_and_drop_zero_with_destructor() {
 @[1-6](TypeWithDestructor implementing a destructor.)
 @[8](declaring a constant for TypeWithDestructor.)
 @[13](**x** gets dropped at end of function, calling drop. prints "Dropped. Held 0.".)
+
+---
+
+Static items
+============
+
+Static items are similar to constant items, except for:
+
+* It represents a precise memory location.
+* Have static lifetime.
+* Do not call Drop at the end of the program.
+
+If a static item is non-mutable, that is not interior mutable can be placed
+is read-only memory.
+
+All access to static items are safe, except:
+* Item's type must have a Sync trait to allow thread-safe access.
+* Static may refer other statics only through a reference, except when using
+paths to statics in constant expression.
+* Constants cannot refer to statics.
+
++++
+
+Mutable statics
+===============
+
+If a static item is declared with the mut keyword, an unsafe block is
+required to read or write the static item.
+
+Mutable statics have the same restrictions as normal statics, except
+that the type does not have to implement the Sync trait.
+
+---
+
+Statics or Constants
+====================
+
+Constants should, in general, be preferred over statics unless one of the following are true:
+
+* Large amounts of data are being stored
+* The single-address property of statics is required.
+* Interior mutability is required.
 
 ---
 
@@ -1577,6 +2337,13 @@ while the path @color[blue](api::f) would be allowed.
 
 ---
 
+Static lifetime
+===============
+
+* Outlives all other lifetimes.
+
+---
+
 Dynamically sized type
 ======================
 
@@ -1613,6 +2380,11 @@ BitAnd, BitOr
 
 ---
 
+External blocks
+===============
+
+---
+
 List of presentations
 =====================
 
@@ -1626,6 +2398,8 @@ List of presentations
 * Safety
 * Mono-morphisation
 * Macro
+
+https://blog.rust-lang.org/2018/11/27/Rust-survey-2018.html
 
 ---
 
@@ -1642,6 +2416,28 @@ mod thread {
     #[path = "tls.rs"]
     mod local_data;
 }
+
+Attributes that have meaning for an ``implementation``
+cfg, deprecated, doc, and the lint check attributes.
+
+Type params: Attributes
+
+	Generic lifetime and type parameters allow attributes on them.
+
+	```rust
+	// Assume that the derive for MyFlexibleClone declared `my_flexible_clone` as
+	// an attribute it understands.
+	#[derive(MyFlexibleClone)] struct Foo<#[my_flexible_clone(unbounded)] H> {
+		a: *const H
+	}
+	```
+
+Attributes on statements:
+
+    Statements accept outer attributes.
+    The attributes that have meaning on a statement are cfg, and the lint
+    check attributes.
+
 
 ---
 
