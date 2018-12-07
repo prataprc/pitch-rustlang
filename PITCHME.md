@@ -456,6 +456,38 @@ Literals: Numbers
 - By default float is infered as **f32**.
 @ulend
 
++++
+
+@transition[none]
+
+Numbers: Example
+================
+
+@snap[number-example fragment]
+@color[blue](1000)
+<br/> <br/>
+As a mathematical value.
+@snapend
+
+@snap[number-example fragment]
+@color[blue](1000u128)
+<br/> <br/>
+Number values can be types with one of
+u8, i8, u16, i16, u32, i32, u64, i64, u128, i128, usize, isize
+@snapend
+
+@snap[number-example fragment]
+@color[blue](1000_u128)
+<br/> <br/>
+Use underscore to avoid clutter.
+@snapend
+
+@snap[number-example fragment]
+@color[blue](1_000_000_u128)
+<br/> <br/>
+Use as many underscore to make it readable.
+@snapend
+
 ---
 
 Literals: Boolean

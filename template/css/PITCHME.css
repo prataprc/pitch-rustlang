@@ -321,6 +321,9 @@
 .reveal table {
     font-size: 0.75em !important;
 }
+div.number {
+    font-size: 1.75em !important;
+}
 .text-crimson {
     color: crimson !important;
 }
@@ -370,11 +373,6 @@ ul.para {
 .text-red {
     color: red;
 }
-.slide-whitespace table tr {
-  opacity: 0;
-  visibility: hidden;
-  transition: all .2s ease;
-}
 table.south-west {
     position: fixed;
     bottom: 35px;
@@ -398,4 +396,15 @@ div.module-tree {
     top: 8em;
     right: 1em;
     text-align: right;
+}
+
+div.number-example {
+    margin-top: 3em !important;
+    font-size: 1.75em !important;
+}
+div.number-example.fragment.visible:not(.current-fragment) {
+    display: none;
+    height:0px;
+    line-height: 0px;
+    font-size: 0px;
 }
