@@ -399,12 +399,7 @@ div.module-tree {
 }
 
 div.number-example {
-    margin-top: 3em !important;
+    position: fixed;
+    top: 3em !important;
     font-size: 1.75em !important;
-}
-div.number-example.fragment.visible:not(.current-fragment) {
-    display: none;
-    height:0px;
-    line-height: 0px;
-    font-size: 0px;
 }
