@@ -401,5 +401,7 @@ div.module-tree {
 div.number-example {
     position: fixed;
     top: 3em !important;
+    width: 100% !important;
+    height: 100% !important;
     font-size: 1.75em !important;
 }
