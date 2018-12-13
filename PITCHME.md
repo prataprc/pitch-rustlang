@@ -191,10 +191,10 @@ fn main() {
 Syntax and Tokens
 =================
 
-Before expanding further into the language concepts and features
-let us go through its syntax and tokens.
+Before expanding further into the language concepts let us go through
+its syntax and tokens, namely:
 
-* Inventory of keywords.
+* keywords.
 * Identifiers.
 * Whitespace rules and meaning.
 * Comments within rust program.
@@ -209,12 +209,12 @@ let us go through its syntax and tokens.
 Keywords
 ========
 
-Rust keywords are identifier tokens that have special meaning. Keywords can
+Keywords are identifier tokens that have special meaning. Keywords can
 generally be classified between:
 
 @ul
-* **control flow** - @color[gray](if else loop for while match break continue fn return)
 * **data** - @color[gray](false true box const let mut move ref self static)
+* **control flow** - @color[gray](if else loop for while match break continue fn return)
 * **type** - @color[gray](enum Self type struct trait unsafe where union impl)
 * **compiler** - @color[gray](crate extern mod pub super self use)
 @ulend
@@ -298,13 +298,13 @@ Keywords reserved for compiler action.
 Identifiers
 ===========
 
-Similar to symbols in C, used to name items in a rust program. Like,
+Similar to symbols in C, can be used to name items in a rust program. Like,
 
-- **Tuple**, **struct**, **union**, **type-alias**. Start with uppercase and use camel-case. @color[blue](struct BigInt { ... })
+- **Tuple**, **struct**, **union**, **type-alias**. Start with uppercase and use camel-case. <br/> @color[blue](struct BigInt { ... })
 - **Local variable-name**. Start with smallcase and use `_` as word separator. <br/> @color[blue](struct BigInt { int64 upper\_half, int64 lower\_half })
 - **Constants** and **static name**. Use all UPPERCASE and use `_` as word separator. <br/> @color[blue](const LIMIT_START = 100\_i32)
 - **Type parameter**. Use single uppercase alphabet. @color[blue](T, D)
-- **Lifetime**. Use single lowercase alphabet, 'static and '_ are reserved lifetime. @color[blue]('a, 'b)
+- **Lifetime**. Use single lowercase alphabet, @color[blue]('_), @color[blue]('a), @color[blue]('b), @color[blue]('static).
 - **Field-name** within struct and union. Same as local variable-name
 - **Variant-name** within enumeration. Same as Type-name.
 - **Function-name**. Same as local variable name.
@@ -505,6 +505,8 @@ Lifetimes and loop-labels
 Punctuations
 ============
 
+The semicolon following a statement is not a part of the statement itself. They are invalid when using the stmt macro matcher.
+
 ---
 
 Delimiters
@@ -584,12 +586,9 @@ In other words, a value can be treated as an instance of its type.
 
 ---
 
-Inventory of types
-==================
+Primitive types
+===============
 
-Primitive types:
-
-@ul
 - **Boolean type**
 - **Integer machine types - u8, u16, u32, u64, u128, i8, i16, i32, i64, i128**
 - **Floating point - f32, f64**
@@ -597,21 +596,24 @@ Primitive types:
 - **Textual types - char, str**
 - **Never type !**
 - **Unit type ()**
-@ulend
 
-@snap[mt20 fragment]
-Complex types:
-@snapend
+---
 
-@ul[mt20]
-- **Structural type**
-- **Tuple type**
+Complex types
+=============
+
 - **Array type**
 - **Slice type**
+- **Tuple type**
+- **Structural type**
+- **Union type**
+- **Enumerated type**
+- **Function item type**
+- **Closure type**
+- **Trait object type**
 - **Function pointer**
 - **Reference**
 - **Pointer**
-@ulend
 
 ---
 
@@ -636,18 +638,78 @@ standard library, these are called primitive types.
 
 ---
 
-Complex types
-=============
+Type: Array [T; N]
+==================
 
-@ul
-- Structural type
-- Tuple type
-- Array type
-- Slice type
-- Function pointer
-- Reference
-- Pointer
-@ulend
+An array is a fixed-size sequence of N elements of type T.
+
+* **T** is a type identifier.
+* **N** is size expression that evaluates to a @color[blue](usize).
+* All elements of arrays are always initialized,
+* Access to an array is always bounds-checked in safe methods and operators.
+
+```rust
+let array: [i32; 3] = [1, 2, 3];
+let boxed_array: Box<[i32]> = Box::new([1, 2, 3]);
+let array: Vec<i32> = vec![1,2,3,4];
+```
+@[1](A stack-allocated array.)
+@[2](A heap-allocated array, coerced to a slice.)
+@[3](A heap-allocated, re-sizable array.)
+
++++
+
+Array: Construction
+===================
+
+```rust
+[1, 2, 3, 4];
+["a", "b", "c", "d"];
+[0u8, 0u8, 0u8, 0u8,];
+[[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+[0; 128];
+```
+
+An array expression can be written by enclosing zero or more
+comma-separated expressions of uniform type in square brackets.
+
+Alternatively, there can be exactly two expressions inside the brackets,
+separated by a semi-colon - [a; b]
+* **[a; b]** creates an array containing b copies of the value of a.
+* If b evaluates to more than 1, type of a shall implement **Copy** trait.
+* **b** must be a have type usize and be a constant expression.
+
+Inner attributes are allowed directly after the opening bracket of an array.
+
++++
+
+Array: Indexing
+===============
+
+Array indexing is implemented via Index and IndexMut traits, which
+are implemented by default for [T; N] and [T] types.
+
+* Index, std::ops::Index::index(&a, b)
+* IndexMut, *std::ops::IndexMut::index_mut(&mut a, b)
+
+where
+
+* Indices are zero-based.
+* **b** should be of type usize.
+* Rust will also insert dereference operations on **a** repeatedly to find an implementation.
+
+---
+
+Type: Slice [T]
+===============
+
+* Dynamically sized type.
+
+* **&[T]**, a 'shared slice', often just called a 'slice', it doesn't own the data it points to, it borrows it.
+* **&mut [T]**, a 'mutable slice', mutably borrows the data it points to.
+* **Box<[T]>**, a 'boxed slice'.
+* All elements of slices are always initialized.
+* Access to a slice is always bounds-checked in safe methods and operators.
 
 ---
 
@@ -668,6 +730,65 @@ let _: F = E::A;  // OK
 
 @[1](defines the type Point as a synonym for the type \(u8, u8\).)
 @[4-7](A type alias to an enum type cannot be used to qualify the constructors.)
+
+---
+
+Type: Tuple
+===========
+
+* Heterogeneous product of other types.
+* Has no nominal name.
+* Structurally typed.
+
+Tuple elements can be accessed by:
+
+* Pattern-matching.
+* Using N directly as a field to access the Nth element.
+* Inner attributes are allowed directly after the opening parenthesis
+of a tuple expression. All attributes applicable on block expression
+are applicable on tuple.
+
+```rust
+type Pair<'a> = (i32, &'a str);
+let p: Pair<'static> = (10, "ten");
+let (a, b) = p;
+
+assert_eq!(a, 10);
+assert_eq!(b, "ten");
+assert_eq!(p.0, 10);
+assert_eq!(p.1, "ten");
+```
+
++++
+
+Tuple constructor
+=================
+
+```rust
+(0.0, 4.5);
+("a", 4usize, true);
+();
+let unit_x = Point(1.0, 0.0);
+```
+
+Single element tuple:
+
+```rust
+(0,);
+(0);
+```
+
+@[5](single-element tuple.)
+@[6](zero in parentheses.)
+
++++
+
+Tuple access
+============
+
+Tuples can be indexed using the number corresponding to the
+position of the field. The index must be written as a
+decimal literal with no underscores or suffix.
 
 ---
 
@@ -1489,6 +1610,8 @@ Kinds of expressions
 Literal expressions.
 PathExpression
 
+BlockExpression
+
 OperatorExpression
 GroupedExpression
 ArrayExpression
@@ -1503,7 +1626,6 @@ FieldExpression
 
 ClosureExpression
 
-BlockExpression
 LoopExpression
 ContinueExpression
 BreakExpression
@@ -1512,6 +1634,122 @@ IfExpression
 IfLetExpression
 MatchExpression
 ReturnExpression
+
+---
+
+Path Expression:
+
+A path used as an expression context denotes either a local variable
+or an item.
+
+Path expressions that resolve to local or static variables are place
+expressions.
+
+Others paths are value expression
+
+---
+
+Block expression
+================
+
+```rust
+{
+   "optional inner attributes"
+   "zero or more statements";
+   "optional expression"
+}
+```
+
+* Blocks are always value expressions.
+* Evaluate the last expression in value expression context.
+* This can be used to force moving a value if really needed.
+
+Different forms of block expression:
+
+* Function and method bodies.
+* Loop bodies (loop, while, while let, and for)
+* Control flow (if and if let).
+
++++
+
+Block type
+==========
+
+Like all expressions, block expressions are typed. The type of a
+block is the type of the final expression, or () if the final
+expression is omitted.
+
+```rust
+let _: () = {
+    fn_call();
+};
+
+let five: i32 = {
+    fn_call();
+    5
+};
+
+assert_eq!(5, five);
+```
+
++++
+
+Evaluating blocks
+=================
+
+**Scope**
+
+* Item declarations are only in scope inside the block itself
+* Let declarations variables declared by let statements are in scope from
+the next statement until the end of the block.
+
+When evaluating a block expression, each statement, except for item
+declaration statements, is executed sequentially.
+
+Then the final expression is executed, if given, and its value is treated
+as block expression's value, else it is **()**.
+
++++
+
+Unafe blocks
+============
+
+A block of code can be prefixed with the unsafe keyword to permit
+unsafe operations. Examples:
+
+```rust
+unsafe {
+    let b = [13u8, 17u8];
+    let a = &b[0] as *const u8;
+    assert_eq!(*a, 13);
+    assert_eq!(*a.offset(1), 17);
+}
+
+let a = unsafe { an_unsafe_fn() };
+```
+
+* Bound check on array is disabled.
+
++++
+
+
+Block attributes
+================
+
+Inner attributes are allowed directly after the opening brace
+of a block expression in the following situations
+
+The attributes that have meaning on a block expression are
+cfg and the lint check attributes.
+
+Example:
+
+```rust
+fn is_unix_platform() -> bool {
+    #[cfg(unix)] { true }
+    #[cfg(not(unix))] { false }
+}
+```
 
 ---
 
