@@ -405,3 +405,13 @@ div.number-example {
     height: 100% !important;
     font-size: 1.75em !important;
 }
+
+/* cargo */
+
+img.cargo-new {
+    height: 12em !important;
+}
+
+img.cargo-layout {
+    height: 17em !important;
+}

@@ -27,7 +27,7 @@ as the name of the crate.
 Each crate produces an output that is either:
 
 * A Binary crate that contains a main() function.
-* A Library crate build from @color[blue](lib.rs)
+* A Library crate built from @color[blue](lib.rs)
 
 Cargo is the build system shipped along with rust toolchain.
 
@@ -35,6 +35,8 @@ Cargo is the build system shipped along with rust toolchain.
 
 Modules
 =======
+
+Example:
 
 ```bash
 mod math {
@@ -72,7 +74,7 @@ mod thread {
 ```
 
 @snap[module-tree]
-![TREE](./module-tree.png) // TODO: move this to asset/ subdir
+![TREE](./cargo/module-tree.png) // TODO: move this to asset/ subdir
 @snapend
 
 <br/>
@@ -86,20 +88,20 @@ include files under sub-directories by nested module declaration.
 
 ---
 
-Cargo matrix
-============
+Command matrix
+==============
 
 develop       | build             | test  | package        | distribute  | install
------------------------------------------------------------------------------------
- login        | check             | test  | metadata       | owner       | install
- new          | build             | bench | locate-project | publish     | search
- init         | rustc             |       | package        | yank        | uninstall
- bench        | doc               |       | pkgid          |             | update
- fix          | rustdoc           |       | read-manifest  |             |
- git-checkout | generate-lockfile |       | verify-project |             |
- run          | fetch             |       | version        |             |
- fmt          | clean             |       |                |             |
- clippy       |                   |       |                |             |
+--------------|-------------------|-------|----------------|-------------|---------
+ new          | check             | test  | metadata       | login       | install
+ init         | build             | bench | locate-project | owner       | search
+ bench        | rustc             |       | package        | publish     | uninstall
+ fix          | doc               |       | pkgid          | yank        | update
+ git-checkout | rustdoc           |       | read-manifest  |             |
+ run          | generate-lockfile |       | verify-project |             |
+ fmt          | fetch             |       | version        |             |
+ clippy       | clean             |       |                |             |
+              |                   |       |                |             |
 
 ---
 
@@ -118,9 +120,9 @@ Crate a rust project to be distributed as library:
  $ cargo new hello_world --lib
 ```
 
-![CARGO-NEW](./cargo-binary-new.png) // TODO: move this to asset/ subdir
+@img[cargo-new](./cargo/cargo-binary-new.png)
 
----
++++
 
 Development: Execute
 ====================
@@ -137,7 +139,66 @@ Hello, world!
 Package layout
 ==============
 
-![LAYOUT](./layout.png) // TODO: move this to asset/ subdir
+@img[cargo-layout](./cargo/layout.png)
+
+---
+
+Dependency: Versioning
+======================
+
+Cargo uses semver versioning - **< major >.< minor >.< patch >**
+
+* **patch version** to be bumped up for bug fixes that do not alter
+the user facing interface, like APIs.
+* **minor version** to be bumped up for backward compatible changes
+to APIs.
+* **major version** to be bumped up for backward in-compatible changes.
+
+And dependency versioning uses 3 formats to identify the
+maximum available, greedy, version for the build.
+
+* Caret requirements, default requirement.
+* Tilde requirements.
+* Wildcard requirements.
+
+The versioning requirements mostly matters when using "cargo update"
+command.
+
+---
+
+Dependency: Caret requirement
+==============================
+
+![CARET](./cargo/caret-dependency.png) // TODO: move this to asset/ subdir
+
+Cargo considers 0.x.y to be compatible with 0.x.z, where y ≥ z and x > 0.
+
+---
+
+Dependency: Tilde requirement
+=============================
+
+![CARET](./cargo/caret-dependency.png) // TODO: move this to asset/ subdir
+
+---
+
+Dependency: Wildcard requirement
+================================
+
+![CARET](./cargo/wildcard-dependency.png) // TODO: move this to asset/ subdir
+
+---
+
+Dependency: Other formats
+=========================
+
+**Inequality requirements**
+
+![CARET](./cargo/inequality-dependency.png) // TODO: move this to asset/ subdir
+
+**Multiple requirements**
+
+![CARET](./cargo/multiple-dependency.png) // TODO: move this to asset/ subdir
 
 ---
 
@@ -181,6 +242,17 @@ other words, repeatable builds are guaranteed for binaries.
 
 Build: Dependencies
 ===================
+
+Dependencies can come from:
+* Default registry crates.io, also the default dependency source.
+* Git repository (via git-url).
+* Local file-system.
+
+---
+
+Build: Git repository
+=====================
+
 
 ---
 
