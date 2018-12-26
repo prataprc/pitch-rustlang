@@ -16,11 +16,11 @@ Rust program
 ============
 
 The compilation unit of rust program is called a @color[blue](crate),
-where crates can be further organised as @color[blue](modules),
+where crates can be further organized as @color[blue](modules),
 in separate @color[blue](files) and @color[blue](directories).
 
 A module in rust program is an @color[blue](item) that wraps
-up all other items, scoping them within a namespace.
+up all other items, scoping them within a name-space.
 The compilation unit starts with anonymous module, whose name is same
 as the name of the crate.
 
@@ -29,7 +29,7 @@ Each crate produces an output that is either:
 * A Binary crate that contains a main() function.
 * A Library crate built from @color[blue](lib.rs)
 
-Cargo is the build system shipped along with rust toolchain.
+Cargo is the build system shipped along with rust tool-chain.
 
 ---
 
@@ -61,7 +61,7 @@ File and directories
 ====================
 
 There is a nifty way to map module name into file-name and directory name
-and there by organising code in multiple files and directories:
+and there by organizing code in multiple files and directories:
 
 ```bash
 mod vec; // Load the `vec` module from `vec.rs`
@@ -74,7 +74,7 @@ mod thread {
 ```
 
 @snap[module-tree]
-![TREE](./cargo/module-tree.png) // TODO: move this to asset/ subdir
+![TREE](./cargo/module-tree.png) // TODO: move this to asset/ sub-directory
 @snapend
 
 <br/>
@@ -91,17 +91,90 @@ include files under sub-directories by nested module declaration.
 Command matrix
 ==============
 
+Following is a common set of commands used during each phase of
+working with a rust project:
+
 develop       | build             | test  | package        | distribute  | install
 --------------|-------------------|-------|----------------|-------------|---------
  new          | check             | test  | metadata       | login       | install
  init         | build             | bench | locate-project | owner       | search
- bench        | rustc             |       | package        | publish     | uninstall
- fix          | doc               |       | pkgid          | yank        | update
- git-checkout | rustdoc           |       | read-manifest  |             |
- run          | generate-lockfile |       | verify-project |             |
- fmt          | fetch             |       | version        |             |
- clippy       | clean             |       |                |             |
-              |                   |       |                |             |
+ fix          | doc               |       | package        | publish     | uninstall
+ git-checkout | generate-lockfile |       | pkgid          | yank        | update
+ run          | fetch             |       | read-manifest  |             |
+              | clean             |       |                |             |
+
++++
+
+Commands: Development
+=====================
+
+* **new**, create a new package.
+* **init**, create a new package in an existing directory.
+* **fix**, automatically fix link warnings reported by ``rustc``.
+* **git-checkout**, checkout a copy of a git repository.
+* **run**, run the main binary of the local package, ``src/main.rs``.
+
++++
+
+Commands: Build
+===============
+
+* **check**, check a local package and all of its dependencies for errors.
+* **build**, compile a local package and all of its dependencies.
+* **doc**, build a package's documentation.
+* **generate-lockfile**, generate the lockfile for a project.
+* **fetch**, fetch dependencies of a package from the network.
+* **clean**, remove artifacts that cargo has generated in the past.
+
++++
+
+Commands: Test
+==============
+
+* **test**, execute all unit and integration tests of a local package.
+* **bench**, execute all benchmarks of a local package.
+
++++
+
+Commands: Packaging
+===================
+
+* **metadata**, output the resolved dependencies of a project.
+* **locate-project**, output the resolved dependencies of a project.
+* **package**, assemble the local package into a distribution.
+* **pkgid**, print a fully qualified package specification.
+* **read-manifest**, print a JSON representation of a Cargo.toml manifest.
+
++++
+
+Commands: Distribute
+====================
+
+By default cargo uses crates.io registry.
+
+* **login**, save an API token from the registry locally.
+* **owner**, manage the owners of a crate on the registry.
+* **publish**, upload a package to the registry.
+* **yank**, remove a pushed crate from the index
+
+A published version of a crate cannot be deleted.
+
++++
+
+Commands: Install
+=================
+
+* **install**, install a rust binary.
+* **search**, search packages in crates.io
+* **uninstall**, remove a rust binary.
+* **update**, update dependencies as recorded in the local lock file.
+
+---
+
+Package layout
+==============
+
+@img[cargo-layout](./cargo/layout.png)
 
 ---
 
@@ -136,17 +209,10 @@ Hello, world!
 
 ---
 
-Package layout
-==============
+Dependency: Versions
+====================
 
-@img[cargo-layout](./cargo/layout.png)
-
----
-
-Dependency: Versioning
-======================
-
-Cargo uses semver versioning - **< major >.< minor >.< patch >**
+Cargo uses semver version convention - **< major >.< minor >.< patch >**
 
 * **patch version** to be bumped up for bug fixes that do not alter
 the user facing interface, like APIs.
@@ -169,7 +235,7 @@ command.
 Dependency: Caret requirement
 ==============================
 
-![CARET](./cargo/caret-dependency.png) // TODO: move this to asset/ subdir
+![CARET](./cargo/caret-dependency.png)
 
 Cargo considers 0.x.y to be compatible with 0.x.z, where y ≥ z and x > 0.
 
@@ -178,14 +244,17 @@ Cargo considers 0.x.y to be compatible with 0.x.z, where y ≥ z and x > 0.
 Dependency: Tilde requirement
 =============================
 
-![CARET](./cargo/caret-dependency.png) // TODO: move this to asset/ subdir
+![CARET](./cargo/caret-dependency.png)
 
 ---
 
 Dependency: Wildcard requirement
 ================================
 
-![CARET](./cargo/wildcard-dependency.png) // TODO: move this to asset/ subdir
+![CARET](./cargo/wildcard-dependency.png)
+
+As of January 22nd, 2016, crates.io rejects all packages
+(not just libraries) with wildcard dependency constraints.
 
 ---
 
@@ -194,11 +263,11 @@ Dependency: Other formats
 
 **Inequality requirements**
 
-![CARET](./cargo/inequality-dependency.png) // TODO: move this to asset/ subdir
+![CARET](./cargo/inequality-dependency.png)
 
 **Multiple requirements**
 
-![CARET](./cargo/multiple-dependency.png) // TODO: move this to asset/ subdir
+![CARET](./cargo/multiple-dependency.png)
 
 ---
 
@@ -212,7 +281,7 @@ $ cargo build
    Compiling hello_world v0.1.0 (file:///path/to/package/hello_world)
 ```
 
-this builds the project in development mode, fast compilation, but
+This builds the project in development mode, fast compilation, but
 slow performing artifacts.
 
 To build in release mode:
@@ -229,11 +298,11 @@ Build: Cargo.lock
 
 Cargo.lock file is generated as part of the build process. Unlike the
 `cargo.toml` manifest which is edited by user, `cargo.lock` is auto
-generated locking down various dependencies, its exact version and
-ensure that we will always get a repeatable build.
+generated locking down various dependencies and its exact version.
 
 For library packages, that other packages will depend on, put Cargo.lock
- in your .gitignore.
+in your .gitignore. In other ways libraries only specify semver
+requirements for their dependencies.
 
 For binary executables or an application, check Cargo.lock into git. In
 other words, repeatable builds are guaranteed for binaries.
@@ -244,6 +313,7 @@ Build: Dependencies
 ===================
 
 Dependencies can come from:
+
 * Default registry crates.io, also the default dependency source.
 * Git repository (via git-url).
 * Local file-system.
@@ -252,13 +322,6 @@ Dependencies can come from:
 
 Build: Git repository
 =====================
-
----
-
-Build: Configuration
-====================
-
-* target_dir
 
 ---
 
@@ -345,6 +408,37 @@ name = "hello_world"
 version = "0.1.0"
 authors = ["Your Name <you@example.com>"]
 ```
+
+---
+
+Cargo: profiles
+===============
+
+To ease cargo usage during multiple phases of development and
+distribution, each phase is identified as a profile which enables
+uses set of default configurations.
+
+* **development** profile, ``[profile.dev]`` used with ``cargo build``.
+* **test** profile, ``[profile.test]`` used with ``cargo test``.
+* **bench** profile, ``[profile.bench]`` used with ``cargo test --release`` and ``cargo bench``.
+* **release** profile, ``[profile.release]`` used with ``cargo build --release``.
+
+---
+
+Cargo: Configuration
+====================
+
+* target_dir
+
+---
+
+Cargo: airplan mode
+===================
+
+After the first time build, cargo caches all the dependencies and
+typically should not access the network. To ensure that local
+environment can build without network dependencies use the ``--frozen``
+switch.
 
 ---
 
