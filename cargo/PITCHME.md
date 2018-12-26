@@ -253,6 +253,31 @@ Dependencies can come from:
 Build: Git repository
 =====================
 
+---
+
+Build: Configuration
+====================
+
+* target_dir
+
+---
+
+Build: Documentation
+====================
+
+Automatically generate user-documentation using cargo:
+
+```bash
+cargo doc
+```
+
+This will create a document directory under the ``targer-dir``. To open
+the documentation in browser:
+
+```bash
+cargo doc --open
+```
+
 
 ---
 
