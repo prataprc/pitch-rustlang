@@ -2613,6 +2613,16 @@ Static lifetime
 
 ---
 
+Memory safety
+=============
+
+Rust memory safety is based on this rule: Given an object T, it is only possible to have one of the following:
+
+* Having several immutable references (&T) to the object (also known as aliasing).
+* Having one mutable reference (&mut T) to the object (also known as mutability).
+
+---
+
 Dynamically sized type
 ======================
 
