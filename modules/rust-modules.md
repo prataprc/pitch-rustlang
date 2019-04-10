@@ -5,10 +5,11 @@ core
     marker		Primitive traits and types representing basic properties of types.
     mem			Basic functions for dealing with memory.
   * panic		Panic support in the standard library.
+	pin			Types which pin data to its location in memory
+	ptr			Manually manage memory through raw pointers.
 
 types
 	char		A character type.
-	convert	    Traits for conversions between types.
 	f32	        This module provides constants which are specific to the
 	f64	        This module provides constants which are specific to the
 	i128		The 128-bit signed integer type.
@@ -20,11 +21,8 @@ types
 			    implementation of the f64 floating point data type.
 	isize		The pointer-sized signed integer type.
 	option		Optional values.
-	pin			Types which pin data to its location in memory
-	ptr			Manually manage memory through raw pointers.
 	rc			Single-threaded reference-counting pointers. 'Rc' stands for 'Reference Counted'.
 	result		Error handling with the Result type.
-	slice		A dynamically-sized view into a contiguous sequence, [T].
 	sync		Useful synchronization primitives.
 	u128		The 128-bit unsigned integer type.
 	u16			The 16-bit unsigned integer type.
@@ -40,6 +38,7 @@ behaviours
 	cell		Shareable mutable containers.
 	clone		The Clone trait for types that cannot be 'implicitly copied'.
 	cmp			Functionality for ordering and comparison.
+	convert	    Traits for conversions between types.
 	default	    The Default trait for types which may have meaningful default values.
 			    dynamic typing of any 'static type through runtime reflection.
 	error	    Traits for working with Errors.
@@ -51,6 +50,7 @@ collection
 	collections	Collection types.
 	string		A UTF-8 encoded, growable string.
 	str			Unicode string slices.
+	slice		A dynamically-sized view into a contiguous sequence, [T].
 	vec			A contiguous growable array type with heap-allocated contents, written Vec<T>.
 
 OS
