@@ -21,9 +21,7 @@ types
 			    implementation of the f64 floating point data type.
 	isize		The pointer-sized signed integer type.
 	option		Optional values.
-	rc			Single-threaded reference-counting pointers. 'Rc' stands for 'Reference Counted'.
 	result		Error handling with the Result type.
-	sync		Useful synchronization primitives.
 	u128		The 128-bit unsigned integer type.
 	u16			The 16-bit unsigned integer type.
 	u32			The 32-bit unsigned integer type.
@@ -31,18 +29,22 @@ types
 	u8			The 8-bit unsigned integer type.
 	usize		The pointer-sized unsigned integer type.
 
-behaviours
-	any			This module implements the Any trait, which enables
+idiomatic
 	borrow		A module for working with borrowed data.
 	boxed		A pointer type for heap allocation.
 	cell		Shareable mutable containers.
+	iter		Composable external iteration.
+	rc			Single-threaded reference-counting pointers. 'Rc' stands for 'Reference Counted'.
+	sync		Useful synchronization primitives.
+
+behaviours
+	any			This module implements the Any trait, which enables
 	clone		The Clone trait for types that cannot be 'implicitly copied'.
 	cmp			Functionality for ordering and comparison.
 	convert	    Traits for conversions between types.
 	default	    The Default trait for types which may have meaningful default values.
 			    dynamic typing of any 'static type through runtime reflection.
 	error	    Traits for working with Errors.
-	iter		Composable external iteration.
 	ops			Overloadable operators.
 
 collection
