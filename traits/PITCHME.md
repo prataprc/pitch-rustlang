@@ -110,11 +110,8 @@ libcore/
 
 
     Borrow<Borrowed: ?Sized>
-
         A trait for borrowing data.
-
     BorrowMut<Borrowed: ?Sized> : Borrow<Borrowed> BorrowMut
-
         A trait for mutably borrowing data.
         Choose Borrow when you want to abstract over different kinds of
         borrowing, or when you’re building a data structure that treats
@@ -225,6 +222,8 @@ libcore/
     IndexMut <Idx: ?Sized>: Index<Idx>
         Used for indexing operations (container[index]) in mutable
         contexts.
+    SliceIndex<T: ?Sized>: private_slice_index::Sealed
+        A helper trait used for indexing operations.
     Try { type Ok; type Error; }
         [Experimental] A trait for customizing the behavior of ?  operator.
 
@@ -260,7 +259,7 @@ libcore/
     Pointer     p formatting.
     UpperExp    E formatting.
     UpperHex    X formatting.
-    Write
+    fmt::Write
         Collection of methods that are required to format a message
         into a stream.
 
@@ -274,138 +273,125 @@ libcore/
     BuildHasher { type Hasher: Hasher; }
         A trait for creating instances of Hasher.
 
-    Sum<A = Self>: Sized
-    Product<A = Self>: Sized
-    FromIterator<A>: Sized
-    IntoIterator
-    Extend<A>
-    Iterator
-    FusedIterator: Iterator
-    TrustedLen : Iterator
-    ExactSizeIterator: Iterator
     DoubleEndedIterator: Iterator
+        An iterator able to yield elements from both ends.
+    ExactSizeIterator: Iterator
+        An iterator that knows its exact length.
+    Extend<A>
+        Extend a collection with the contents of an iterator.
+    FromIterator<A>: Sized
+        Conversion from an Iterator. Used through Iterator's collect() method.
+    IntoIterator { type Item; type IntoIter: Iterator<Item = Self::Item>; }
+        Conversion into an Iterator.
+    Iterator { type Item; }
+        An interface for dealing with iterators.
+    FusedIterator: Iterator
+        An iterator that always continues to yield None when exhausted.
+    Sum<A = Self>: Sized
+        Trait to represent types that can be created by summing up an iterator.
+    Product<A = Self>: Sized
+        Trait to represent types that can be created by multiplying elements
+        of an iterator.
     Step: Clone + PartialOrd + Sized
-    TrustedRandomAccess : ExactSizeIterator
-    TrustedRandomAccess : ExactSizeIterator
-    Freeze
-    DecodableFloat: RawFloat + Copy
-    FullOps: Sized
-    Drop
-    FnBox<A>: FnOnce<A>
+        [Experimental] Objects that can be stepped over in both directions.
+    TrustedLen : Iterator
+        [Experimental] An iterator that reports an accurate length
+        using size_hint.
+
     CoerceUnsized<T: ?Sized>
+
     DispatchFromDyn<T>
-    Deref
-    DerefMut: Deref
-    Receiver
-    Generator
-    BoxMeUp
-    Sealed
-    SliceIndex<T: ?Sized>: private_slice_index::Sealed
+        This is used for object safety, to check that a method's receiver
+        type can be dispatched on.
+
+    Generator { type Yield; type Return; }
+        The trait implemented by builtin generator types.
+        Generators, also commonly referred to as coroutines, are currently
+        an experimental language feature in Rust. Added in RFC 2033
+        generators are currently intended to primarily provide a building
+        block for async/await syntax but will likely extend to also providing
+        an ergonomic definition for iterators and other primitives.
+
     Pattern<'a>: Sized
     Searcher<'a>
     ReverseSearcher<'a>: Searcher<'a>
     DoubleEndedSearcher<'a>: ReverseSearcher<'a>
 
-libgraphviz/
-    Labeller<'a>
-    GraphWalk<'a>
-
 libproc_macro/
-    ApplyL<'a>
-    LambdaL: for<'a> ApplyL<'a>
-    Encode<S>: Sized
-    Decode<'a, 's, S>: Sized
-    DecodeMut<'a, 's, S>: Sized
-    trait Types
-    $(pub trait $name: Types
-    Server: Types $(+ $name)*
-    DispatcherTrait
-    ExecutionStrategy
     MultiSpan
-
-libserialize/
-    ToHex
-    FromHex
-    ToJson
-    Encoder
-    Decoder
-    Encodable
-    Decodable: Sized
-    SpecializationError
-    SpecializedEncoder<T: ?Sized + UseSpecializedEncodable>: Encoder
-    SpecializedDecoder<T: UseSpecializedDecodable>: Decoder
-    UseSpecializedEncodable
-    UseSpecializedDecodable: Sized
+        Trait implemented by types that can be converted into a set of Spans.
 
 libstd/
-    AsciiExt
-    AsInner<Inner: ?Sized>
-    AsInnerMut<Inner: ?Sized>
-    AsRawFd
-    AsRawHandle
-    AsRawSocket
     BufRead: Read
-    CommandExt
-    DirBuilderExt
-    DirEntryExt
+        A BufRead is a type of Reader which has an internal buffer, allowing
+        it to perform extra ways of reading.
     Error: Debug + Display
-    ExitStatusExt
-    FileExt
-    FileTypeExt
-    FromInner<Inner>
-    FromRawFd
-    FromRawHandle
-    FromRawSocket
-    IntoInner<Inner>
-    IntoRawFd
-    IntoRawHandle
-    IntoRawSocket
-    IsMinusOne
-    IsZero
-    JoinHandleExt
-    JoinHandleExt
-    MetadataExt
-    OpenOptionsExt
-    OsStrExt
-    OsStringExt
-    Packet
-    PermissionsExt
-    Put<K, V>
+        Error is a trait representing the basic expectations for error values,
+        i.e., values of type E in Result<T, E>. Errors must describe
+        themselves through the Display and Debug traits, and may provide
+        cause chain information
     Read
+        The Read trait allows for reading bytes from a source.
     RefUnwindSafe
+        A marker trait representing types where a shared reference is
+        considered unwind safe.
     Seek
+        The Seek trait provides a cursor which can be moved within
+        a stream of bytes.
     Termination
+        A trait for implementing arbitrary return types in the main function.
     ToSocketAddrs
-    TryIntoInner<Inner>: Sized
-    TryIntoRawFd: Sized
+        A trait for objects which can be converted or resolved to one or more
+        SocketAddr values.
     UnwindSafe
-    UserSafe
-    UserSafeSized: Copy + Sized
-    Write
+        A marker trait which represents "panic safe" types in Rust.
+    io::Write
+        A trait for objects which are byte-oriented sinks.
 
-libsyntax/
-    HasAttrs: Sized
-    MultiItemDecorator
-    MultiItemModifier
-    ProcMacro
-    AttrProcMacro
-    TTMacroExpander
-    IdentMacroExpander
-    MacResult
-    Resolver
-    AstBuilder
-    ExpectOne<A: Array>
-    MutVisitor: Sized
-    PpAnn
-    PrintState<'a>
-    FileLoader
-    MapInPlace<T>: Sized
-    Visitor<'ast>: Sized
-
-libterm/
-    Terminal: Write
-
-libtest/
-    OutputFormatter
-    TDynBenchFn: Send
-    Stats
+    AsRawFd
+        A trait to extract the raw unix file descriptor from an
+        underlying object. (UNIX)
+    AsRawHandle
+        Extracts raw handles. (WINDOWS)
+    AsRawSocket
+        Extracts raw sockets. (WINDOWS)
+    CommandExt
+        Extensions to the process::Command builder.
+    DirBuilderExt
+        Unix-specific extensions to fs::DirBuilder.
+    DirEntryExt
+        Unix-specific extension methods for fs::DirEntry.
+    ExitStatusExt
+        Extensions to process::ExitStatus
+    FileExt
+        Extensions to File.
+    FileTypeExt
+         Extensions for FileType.
+    FromRawFd
+        A trait to express the ability to construct an object from a raw
+        file descriptor. (UNIX)
+    FromRawHandle
+        Construct I/O objects from raw handles. (WINDOWS)
+    FromRawSocket
+        Creates I/O objects from raw sockets.
+    IntoRawFd
+        A trait to express the ability to consume an object and acquire
+        ownership of its raw file descriptor. (UNIX)
+    IntoRawHandle
+        A trait to express the ability to consume an object and acquire
+        ownership of its raw HANDLE. (WINDOWS)
+    IntoRawSocket
+        A trait to express the ability to consume an object and acquire
+        ownership of its raw SOCKET.
+    JoinHandleExt
+        Extensions to thread::JoinHandle. (UNIX)
+    MetadataExt
+        OS-specific extensions to fs::Metadata.
+    OpenOptionsExt
+        Extensions to fs::OpenOptions.
+    OsStrExt
+        Extensions to OsStr.
+    OsStringExt
+        Extensions to OsString.
+    PermissionsExt
+        Extensions to fs::Permissions.
