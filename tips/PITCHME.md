@@ -1,3 +1,214 @@
+Destructing from reference to mutable copy
+==========================================
+
+```
+fn ref_to_immutable_copy(&x: &i32) {
+    // scope takes immutable ownership of value, by copy.
+    println!("x = {}", x);
+}
+
+fn mutable_ref(x: &mut i32) {
+     // scope takes a mutable reference via x.
+    *x = 20;
+    println!("x = {}", *x);
+}
+
+fn mut_ref_to_mut_copy(&mut mut x: &mut i32) {
+    // scope takes a mutable ownership of value, by copy
+    x = 20;
+    println!("x = {}", x);
+}
+```
+
+Ownned heap to shared reference
+===============================
+
+Both Box<T> and &T are nothing but a pointer reference. That being
+said, the former case owns the reference while the later case holds
+on to a shared reference. Here is a neat trick to convert between
+the two.
+
+From Box<T> to &T
+```
+let a = Box::new(10);
+let b = &*a;
+```
+
+From &T to Box<T>
+```
+fn myfunc(arg: &i32) -> Box<T> {
+    // Note that we are creating a duplicate ownership
+    // for the value pointed by arg here. Make sure that
+    // one of them leaks.
+    unsafe{ Box::from_raw(arg as *const T as *mut T) }
+}
+
+fn main() {
+    let a = Box::new(10);
+    let b = myfunc(&a);
+    Box::leak(b); // we are leaking b here
+}
+```
+
+
+Avoiding pollution of constraints
+=================================
+
+When parametrising data structures with types, especially
+those that are algorithmically intensive, we quickly find
+that plenty of contraints, aka trait bounds, gets added to
+type parameters.
+
+For EG:
+
+```
+struct Llrb<K,V>
+where
+    K: Clone + Ord,
+    V: Clone,
+{
+}
+```
+
+is Llrb tree used for indexing {Key, Value} pairs, where
+key and value types are parameterised. One of the API that
+gets exposed as part of the type implementation is the
+validate() API, which ensures that data-set is in sane
+condition. Failing which it needs to capture the erroring
+entry that might involve a `Debug` constraint on K parameter.
+
+Now a situation arises where K type needs to be bounded by
+Debug trait. But we don't want this to be part of Llrb type
+signature. To achieve this:
+
+```
+impl<K,V> for Llrb<K,V>
+where
+    K: Clone + Ord + Debug,
+    V: Clone,
+{
+    fn validate(..) -> .. {}
+{
+```
+
+Just club the functions that require a common set of trait
+bounds into a single implementation and add those trait bounds
+only for that implementation.
+
+```
+use std::fmt::Debug;
+
+#[derive(Clone)]
+struct S(i32);
+
+struct Mytype<K>
+where
+    K: Clone,
+{
+    a: K,
+}
+
+impl<K> Mytype<K>
+where
+    K: Clone,
+{
+    fn new(k: K) -> Mytype<K> {
+        Mytype { a: k }
+    }
+
+    fn value(&self) -> i32 {
+        10
+    }
+}
+
+impl<K> Mytype<K>
+where
+    K: Clone + Debug,
+{
+    fn validate(&self) -> String {
+        format!("{:?}", self.a)
+    }
+}
+
+fn main() {
+    let a = Mytype::new(S(10));
+    println!("{}", a.value());
+}
+```
+
+Use Option instead of Default
+=============================
+
+When designing the APIs with type-parameters, it is tempting
+to bound them with a Default constraint. In most cases such
+need arises because in some context, we may want to initialize
+the parametrised type with a default value.
+
+In such cases, use Option<T> and initialize with None, instead
+of contraining T: with Default.
+
+Pipelining Option
+=================
+
+Sometimes, we would want to tranform the output `Option<T>` to
+`Option<U>`, so on and so forth. One sleek way to do that is:
+
+```
+fn sq(x: u32) -> Option<u32> { Some(x * x) }
+fn nope(_: u32) -> Option<u32> { None }
+
+assert_eq!(Some(2).and_then(sq).and_then(sq), Some(16));
+assert_eq!(Some(2).and_then(sq).and_then(nope), None);
+assert_eq!(Some(2).and_then(nope).and_then(sq), None);
+assert_eq!(None.and_then(sq).and_then(sq), None);
+```
+
+`and_then` return None if the option is None, otherwise calls
+`f` with the wrapped value and returns the result.
+
+Some languages call this operation `flatmap`.
+
+
+API convention for converting type and references
+=================================================
+
+Conversions should be provided as methods, with names prefixed as follows:
+
+Prefix      | Cost       | Ownership
+--------------------------------------------------------------
+as\_        | Free       | borrowed -> borrowed
+--------------------------------------------------------------
+to\_        | Expensive  | borrowed -> borrowed
+            |            | borrowed -> owned (non-Copy types)
+            |            | owned -> owned (Copy types)
+--------------------------------------------------------------
+into\_      | Variable   | owned -> owned (non-Copy types)
+
+
+panic on lossy casting
+======================
+
+```
+Executing an as expression casts the value on the left-hand
+side to the type on the right-hand side.
+```
+
+For more information:
+https://doc.rust-lang.org/reference/expressions/operator-expr.html?highlight=cast#type-cast-expressions
+
+Using `as` expression to cast from one type to another might lead
+to lossy conversion. If such behaviour is not desired, TryInto trait
+can be used. EG:
+
+```
+let x: i32 = 10;
+let y: u8 = x.try_into().unwrap(); // if we are sure that  0 <= x < 256
+match x.try_into() {
+    Ok(y) => ...
+    Err(err) => ...
+}
+```
+
 AsRef, Borrow for flexible APIs
 ===============================
 
