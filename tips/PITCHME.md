@@ -1,3 +1,46 @@
+selectively compile functions for testing
+=========================================
+
+Test functions are normally attributed with `#[test]` and/or
+`#[cfg(test)]`. Similarly if there are any functions or methods
+that are going to be used only by test-cases, such functions or
+methods can be attributed with `#[cfg(test)]`.
+
+```
+impl Mvcc {
+    #[cfg(test)]
+    pub(crate) fn mvccroot_ref(&self) -> &MvccRoot<K, V> {
+        unsafe { self.snapshot.value.load(Relaxed).as_ref().unwrap() }
+    }
+}
+```
+
+In above case method `mvccroot_ref` is used only by the test
+cases, hence we don't need it as part of the development build.
+
+Setting deep value within structs
+=================================
+
+```
+struct Foo {
+    a: Option<Bar>
+}
+
+struct Bar {
+    b: Baz
+}
+
+struct Baz {
+    c: Option<u32>
+}
+
+fn set_deep_value(mut example:Foo) -> Option<Foo> {
+    example.a.as_mut()?.b.c = Some(42);
+    Some(example)
+}
+```
+
+
 Destructing from reference to mutable copy
 ==========================================
 
