@@ -4,3 +4,4 @@ https://rust-lang-nursery.github.io/api-guidelines/
 https://internals.rust-lang.org/t/pre-rfc-a-new-symbol-mangling-scheme/8501
 https://rust-lang.github.io/rustc-guide/
 http://cliffle.com/blog/rust-typestate/
+https://github.com/pingcap/talent-plan/blob/master/rust/lesson-plan.md

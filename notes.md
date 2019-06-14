@@ -9,3 +9,5 @@ EG: pub unsafe auto trait Send { }
 attributes
 #[lang=""]
 #[derive(xxx,yyy,zzz)]
+
+Blog about trait pollution, example with bogn.
