@@ -1,3 +1,62 @@
+Unsizing and Coerced Unsizing
+=============================
+
+How to convert ``Rc<RefCell<Dog>>`` to ``Rc<RefCell<dyn AnimalT>>`` ?
+
+```
+use std::rc::Rc;
+use std::cell::RefCell;
+
+struct Dog(i32);
+
+trait Animal {}
+
+impl Animal for Dog {}
+
+fn main() {
+  let dog: Rc<RefCell<Dog>> = Rc::new(Dog(0).into());
+  let dog2 = Rc::clone(&dog);
+  let x: Rc<RefCell<dyn Animal>> = dog2;
+}
+```
+
+Unsize is used to mark types which can be coerced to DSTs if behind
+pointers. It is implemented automatically by the compiler.
+
++++
+
+Unsize implementation
+=====================
+
+* [T; N] is Unsize<[T]>
+* T is ``Unsize<Trait>`` when T: Trait
+* ``Foo<..., T, ...>`` is ``Unsize<Foo<..., U, ...>>`` if:
+  * T: ``Unsize<U>``
+  * Foo is a struct
+  * Only the last field of Foo has a type involving T
+  * T is not part of the type of any other fields
+  * ``Bar<T>: Unsize<Bar<U>>``, if the last field of Foo has type ``Bar<T>``
+
+Modules and path names
+======================
+
+Module path           | Filesystem path | File contents
+--------------------------------------------------------
+crate	              | lib.rs	        | mod util;
+crate::util	          | util.rs	        | mod config;
+crate::util           | util/mod.rs     | mod config;
+crate::util::config	  | util/config.rs
+
+Note it is not allowed to have both util.rs and util/mod.rs.
+
+Making both binary and cdylib from one package
+==============================================
+
+```
+[lib]
+crate-type = ["cdylib", "rlib"]
+```
+
 selectively compile functions for testing
 =========================================
 
