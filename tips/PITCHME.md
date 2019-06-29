@@ -1,3 +1,91 @@
+Doctests that require non-default feature
+=========================================
+
+```
+/// Documentation relevant to all users.
+/// Documentation relevant to all users.
+/// Documentation relevant to all users.
+///
+/// Paragraph that mentions the feature.
+#[cfg_attr(feature = "feature", doc = r##"
+Paragraph that only appears when feature is enabled.
+
+```
+// doctest that only exists when the feature is enabled
+```
+"##)]
+```
+
+
+Feature gating testcases
+========================
+
+Sometimes we need to run a subset of assorted unit-test-functions
+with no particular pattern. (for executing test functions with similar
+names there is a separate slide).
+
+In the following example we are defining three features in Cargo.toml
+file like:
+
+```toml
+[features]
+low_level = []
+mid_level = []
+high_level = []
+```
+
+and in our unit-test function we attribute them with each features.
+
+```
+#[cfg(feature = "low_level")]
+fn test_one() {
+}
+
+#[cfg(feature = "mid_level")]
+fn test_two() {
+}
+
+#[cfg(feature = "high_level")]
+fn test_three() {
+}
+```
+
+Now with the above setup, we can invoke ``cargo test`` like:
+
+```
+cargo test --features=low_level
+```
+
+will execute only those unit-test functions that are feature gated with
+``low_level``.
+
+```
+cargo test --features=low_level && cargo test --features=mid_level && cargo test --features=high_level
+```
+
+will execute ``low-level`` function, failing which remaining test
+cases are skipped. ``mid_level`` functions shall be executed only after
+``low_level`` have passed and ``high_level`` functions shall be executed
+only after ``mid_level`` functions have passed.
+
+Executing testcases with similar names
+======================================
+
+```
+cargo test serialize
+```
+
+Above command will execute all unit-test-functions whose function
+name contain ``serialize``.
+
+```
+cargo test llrb_test::
+```
+
+Above command will execute all unit-test-functions under file
+``llrb_test.rs``.
+
+
 Unsizing and Coerced Unsizing
 =============================
 

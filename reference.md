@@ -1,5 +1,6 @@
 https://rust-lang-nursery.github.io/api-guidelines/
 https://rust-lang.github.io/rustc-guide/
+https://doc.rust-lang.org/stable/edition-guide/
 
 https://rust-unofficial.github.io/too-many-lists/
 https://zicklag.github.io/rust-tutorials/rust-plugins.html
@@ -16,3 +17,5 @@ Theory
 
 https://en.wikipedia.org/wiki/Substructural_type_system#Linear_type_systems
 http://munksgaard.me/papers/laumann-munksgaard-larsen.pdf
+https://gitlab.haskell.org/ghc/ghc/wikis/pattern-synonyms
+https://nlp.stanford.edu/software/tregex.html
