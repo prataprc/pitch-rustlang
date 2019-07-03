@@ -7,6 +7,7 @@ https://zicklag.github.io/rust-tutorials/rust-plugins.html
 http://cliffle.com/blog/rust-typestate/
 http://cliffle.com/blog/bare-metal-wasm/
 https://github.com/pingcap/talent-plan/blob/master/rust/lesson-plan.md
+https://github.com/mbrubeck/fast-rust
 
 https://internals.rust-lang.org/t/pre-rfc-a-new-symbol-mangling-scheme/8501
 https://users.rust-lang.org/t/high-accuracy-timer/29019
@@ -19,3 +20,4 @@ https://en.wikipedia.org/wiki/Substructural_type_system#Linear_type_systems
 http://munksgaard.me/papers/laumann-munksgaard-larsen.pdf
 https://gitlab.haskell.org/ghc/ghc/wikis/pattern-synonyms
 https://nlp.stanford.edu/software/tregex.html
+https://utcc.utoronto.ca/~cks/space/blog/unix/FileSyncProblem
