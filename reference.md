@@ -21,3 +21,7 @@ http://munksgaard.me/papers/laumann-munksgaard-larsen.pdf
 https://gitlab.haskell.org/ghc/ghc/wikis/pattern-synonyms
 https://nlp.stanford.edu/software/tregex.html
 https://utcc.utoronto.ca/~cks/space/blog/unix/FileSyncProblem
+https://www.nextplatform.com/2019/07/08/new-approach-could-sink-floating-point-computation/
+https://brson.github.io/rust-anthology/1/all-about-trait-objects.html
+https://lukaskalbertodt.github.io/2018/08/03/solving-the-generalized-streaming-iterator-problem-without-gats.html
+https://blog.empathybox.com/post/19574936361/getting-real-about-distributed-system-reliability
