@@ -303,20 +303,20 @@
     text-align: left !important;
 }
 .reveal h1 {
-    font-size: 1.7em !important;
+    font-size: 1.4em !important;
     text-align: left !important;
     color: crimson !important;
 }
 .reveal p {
     text-align: left !important;
-    font-size: 0.75em !important;
+    font-size: 0.85em !important;
 }
 .reveal ul {
     text-align: left !important;
-    font-size: 0.75em !important;
+    font-size: 0.85em !important;
 }
 .reveal div {
-    font-size: 0.75em !important;
+    font-size: 0.85em !important;
 }
 .reveal table {
     font-size: 0.75em !important;
@@ -348,6 +348,12 @@ code.hljs {
     font-size: 70% !important;
 }
 .mt20 {
+    margin-top: 20px !important;
+}
+.mt30 {
+    margin-top: 20px !important;
+}
+.mt40 {
     margin-top: 20px !important;
 }
 ul.para {
@@ -414,4 +420,13 @@ img.cargo-new {
 
 img.cargo-layout {
     height: 17em !important;
+}
+
+/* rust doc */
+img.rustdoc-workflow {
+    height: 13em !important;
+}
+img.rustdoc-favicon-logo {
+    height: 6em !important;
+    margin-left: 14em !important;
 }
