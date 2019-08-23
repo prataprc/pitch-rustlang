@@ -259,4 +259,16 @@ into final docs.
 
 ---
 
+Examples and test cases
+=======================
+
+Include examples in Rust documentation, it can be verified as part
+of unit-testing.
+
+```rust
+let x = 5;
+```
+
+---
+
 Doc comments are transformed into doc attributes.

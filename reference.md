@@ -2,6 +2,7 @@ Tooling and Toolchain
 =====================
 
 https://github.com/rust-lang-nursery/crater
+https://spec.commonmark.org
 
 Crate of the Week
 =================
@@ -65,18 +66,6 @@ https://github.com/phsym/prettytable-rs
 https://github.com/dtolnay/async-trait
 https://github.com/jsdw/weave
 https://github.com/Canop/broot
-
-Companies
-=========
-
-https://www.iota.org, https://iota.bamboohr.com/jobs/
-https://careers.mozilla.org
-
-People
-======
-
-https://github.com/kanishkarj
-https://github.com/dylan-dpc
 
 Issues
 ======
