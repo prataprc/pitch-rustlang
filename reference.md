@@ -67,6 +67,8 @@ https://github.com/dtolnay/async-trait
 https://github.com/jsdw/weave
 https://github.com/Canop/broot
 
+https://github.com/coreboot
+
 Issues
 ======
 
