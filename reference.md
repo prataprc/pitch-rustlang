@@ -3,6 +3,7 @@ Tooling and Toolchain
 
 https://github.com/rust-lang-nursery/crater
 https://spec.commonmark.org
+https://github.com/xd009642/tarpaulin
 
 Crate of the Week
 =================
