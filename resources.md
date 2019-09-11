@@ -28,10 +28,15 @@ Companies
 
 https://www.iota.org, https://iota.bamboohr.com/jobs/
 https://careers.mozilla.org
+https://www.firstinspires.org/robotics/frc
 
 People
 ======
 
 https://github.com/kanishkarj
 https://github.com/dylan-dpc
-
+https://github.com/sunjay
+https://www.linkedin.com/in/andhome/
+https://www.linkedin.com/in/stephen-crane-4009b727/
+https://www.linkedin.com/in/danielkolsoi/
+https://www.linkedin.com/in/perlarsen/

@@ -28,6 +28,7 @@ https://users.rust-lang.org/t/high-accuracy-timer/29019
 https://users.rust-lang.org/t/write-up-on-using-typestates-in-rust/28997
 https://users.rust-lang.org/t/a-trait-object-with-an-implied-lifetime/29340
 https://rust-embedded.github.io/book/
+https://docs.rs/cargo/0.38.0/cargo/sources/registry/index.html
 
 Theory
 ======
