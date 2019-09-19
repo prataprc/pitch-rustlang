@@ -1,18 +1,7 @@
-Tooling and Toolchain
-=====================
-
-https://github.com/rust-lang-nursery/crater
-https://spec.commonmark.org
-https://github.com/xd009642/tarpaulin
-
-Crate of the Week
-=================
-
-https://users.rust-lang.org/t/crate-of-the-week/2704
-
 Study references
 ================
 
+https://users.rust-lang.org/t/crate-of-the-week/2704
 https://rust-lang-nursery.github.io/api-guidelines/
 https://rust-lang.github.io/rustc-guide/
 https://doc.rust-lang.org/stable/edition-guide/
@@ -30,6 +19,8 @@ https://users.rust-lang.org/t/write-up-on-using-typestates-in-rust/28997
 https://users.rust-lang.org/t/a-trait-object-with-an-implied-lifetime/29340
 https://rust-embedded.github.io/book/
 https://docs.rs/cargo/0.38.0/cargo/sources/registry/index.html
+https://areweasyncyet.rs
+https://spec.commonmark.org
 
 Theory
 ======
@@ -44,32 +35,7 @@ https://brson.github.io/rust-anthology/1/all-about-trait-objects.html
 https://lukaskalbertodt.github.io/2018/08/03/solving-the-generalized-streaming-iterator-problem-without-gats.html
 https://blog.empathybox.com/post/19574936361/getting-real-about-distributed-system-reliability
 https://asomers.github.io/mock_shootout/
-
-Projects
-========
-
-https://crates.io/crates/num
-https://crates.io/crates/plotters
-https://crates.io/crates/reqwest
-https://gitlab.com/bloom42
-https://github.com/robatipoor/install-rust-language
-https://github.com/vorner/contrie/
-https://github.com/Munksgaard/session-types
-https://github.com/Amanieu/parking_lot
-https://github.com/Stebalien/horrorshow-rs
-https://github.com/lloydmeta/frunk
-https://github.com/calebwin/stdg
-https://github.com/mit-pdos/RVirt
-https://github.com/kanishkarj/snoopy
-https://github.com/vberger/loopybayesnet
-https://github.com/heim-rs/heim
-https://github.com/purpleprotocol/hashcow
-https://github.com/phsym/prettytable-rs
-https://github.com/dtolnay/async-trait
-https://github.com/jsdw/weave
-https://github.com/Canop/broot
-
-https://github.com/coreboot
+https://www.neonscience.org/about-hdf5
 
 Issues
 ======
