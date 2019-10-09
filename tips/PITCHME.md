@@ -6,8 +6,22 @@ Casting boolean to integer, true->1, false->0
 What does it mean to mark a trait as unsafe or auto ?
 EG: pub unsafe auto trait Send { }
 
-
 Blog about trait pollution, example with bogn.
+
+Extracting bound-limits from RangeBounds
+========================================
+
+```
+let start = match within.start_bound() {
+    Bound::Included(x) => Bound::Included(*x),
+    Bound::Excluded(x) => Bound::Excluded(*x),
+    Bound::Unbounded => Bound::Unbounded,
+};
+```
+
+Would be nice to have an API defined by ``RangeBounds`` trait
+to return a tuple of (upper, lower) bounds.
+
 Doctests that require non-default feature
 =========================================
 
