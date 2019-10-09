@@ -6,7 +6,7 @@ Casting boolean to integer, true->1, false->0
 What does it mean to mark a trait as unsafe or auto ?
 EG: pub unsafe auto trait Send { }
 
-Blog about trait pollution, example with bogn.
+Blog about trait pollution, example with `rdms`.
 
 Extracting bound-limits from RangeBounds
 ========================================
