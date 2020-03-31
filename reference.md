@@ -3,8 +3,9 @@ Study references
 
 https://users.rust-lang.org/t/crate-of-the-week/2704
 https://rust-lang-nursery.github.io/api-guidelines/
-https://rust-lang.github.io/rustc-guide/
+https://rustc-dev-guide.rust-lang.org/index.html
 https://doc.rust-lang.org/stable/edition-guide/
+https://pontoon.rust-lang.org/
 
 https://rust-unofficial.github.io/too-many-lists/
 https://zicklag.github.io/rust-tutorials/rust-plugins.html
