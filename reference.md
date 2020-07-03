@@ -38,6 +38,7 @@ https://lukaskalbertodt.github.io/2018/08/03/solving-the-generalized-streaming-i
 https://blog.empathybox.com/post/19574936361/getting-real-about-distributed-system-reliability
 https://asomers.github.io/mock_shootout/
 https://www.neonscience.org/about-hdf5
+https://github.com/rust-lang/rfcs/blob/master/text/1445-restrict-constants-in-patterns.md
 
 Issues
 ======
