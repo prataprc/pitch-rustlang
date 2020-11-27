@@ -23,6 +23,7 @@ https://docs.rs/cargo/0.38.0/cargo/sources/registry/index.html
 https://areweasyncyet.rs
 https://spec.commonmark.org
 https://huonw.github.io/blog/2016/04/myths-and-legends-about-integer-overflow-in-rust/
+https://users.rust-lang.org/t/dynamically-choose-between-arc-or-rc
 
 Theory
 ======

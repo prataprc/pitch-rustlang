@@ -20,6 +20,7 @@ as of 2019-09-18
     https://github.com/rust-lang/libc
     https://github.com/rust-lang/git2-rs
     https://github.com/rust-lang/docs.rs
+    https://github.com/rust-fuzz
 
 **library**
     https://github.com/tokio-rs/tokio
